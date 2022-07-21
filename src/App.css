@@ -29,7 +29,7 @@
 
 .home-input {
   margin: 170px 0 0 0;
-  width: 400px;
+  width: 450px;
   height: 70px;
   padding: 30px;
   font-size: 24px;
@@ -45,13 +45,20 @@
 }
 
 .home-error-alert {
-  margin: 20px 160px 0 0;
+  margin: 20px 210px 0 0;
   font-weight: 600;
   color: red;
 }
 
 .home-btn {
   margin: 80px 0 0 0;
+  width: 300px;
+  height: 55px;
+  color: rgb(255, 255, 255);
+  background-color: rgb(48, 143, 175);
+  border: none;
+  border-radius: 6px;
+  font-size: 22px;
 }
 
 .back {

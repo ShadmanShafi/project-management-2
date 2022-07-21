@@ -1,7 +1,7 @@
 import "./App.css";
-import { BrowserRouter } from "react-router-dom";
 import Routes from "./Routes";
 import { MyProvider } from "./ContextStore";
+import { BrowserRouter } from "react-router-dom";
 
 function App() {
   return (

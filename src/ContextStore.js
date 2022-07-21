@@ -8,7 +8,7 @@ const initialState = {
   memberList: [],
 };
 
-const AdminContext = createContext({
+const UserContext = createContext({
   ...initialState,
   setName: () => {},
 });
@@ -99,7 +99,7 @@ export function MyProvider({ children }) {
   };
 
   return (
-    <AdminContext.Provider
+    <UserContext.Provider
       value={{
         ...state,
         setName,
@@ -117,10 +117,10 @@ export function MyProvider({ children }) {
       }}
     >
       {children}
-    </AdminContext.Provider>
+    </UserContext.Provider>
   );
 }
 
-export const useAdminContext = () => useContext(AdminContext);
+export const useUserContext = () => useContext(UserContext);
 
-export default AdminContext;
+export default UserContext;
