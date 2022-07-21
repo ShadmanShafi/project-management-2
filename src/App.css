@@ -1,3 +1,59 @@
+*,
+::after,
+::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 .App {
   text-align: center;
+}
+
+.home {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.home-logo {
+  margin: 120px 0 0 0;
+  width: 80px;
+}
+.home-title {
+  margin: 15px 0 0 0;
+  color: rgb(20,124,160);
+}
+
+.home-input {
+  margin: 170px 0 0 0;
+  width: 400px;
+  height: 70px;
+  padding: 30px;
+  font-size: 24px;
+  font-weight: 100;
+  color: rgb(20,124,160);
+  border: 1px solid rgb(33, 146, 183);
+  border-radius: 6px;
+}
+
+.home-input::placeholder {
+  font-weight: 100;
+  opacity: 0.6;
+}
+
+.home-error-alert {
+  margin: 20px 160px 0 0;
+  font-weight: 600;
+  color: red;
+}
+
+.home-btn {
+  margin: 80px 0 0 0;
+}
+
+.back {
+  background-color: blueviolet;
 }
