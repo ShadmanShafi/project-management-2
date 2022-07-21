@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 export default function Home() {
   const [form, setForm] = useState({ name: "" });
   const [errors, setErrors] = useState([]);
-  const { name } = useUserContext();
+  const { name, setName } = useUserContext();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -26,11 +26,12 @@ export default function Home() {
 
   const onClickSubmit = () => {
     if (validate()) {
+      setName(form.name);
       navigate("/dashboard");
     }
   };
 
-  console.log(form.name);
+  console.log(name);
 
   return (
     <div className="home">
