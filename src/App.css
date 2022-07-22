@@ -131,9 +131,18 @@
 }
 
 .dashboard {
-  background-color: red;
-
+  background-color: silver;
   min-height: 85vh;
+}
+
+.tasks {
+  min-height: 85vh;
+  background-color: bisque;
+}
+
+.members {
+  min-height: 85vh;
+  background-color: grey;
 }
 
 .violet {
