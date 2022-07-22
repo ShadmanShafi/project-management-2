@@ -9,11 +9,7 @@ export default function Dashboard() {
 
   return (
     <div className="dashboard">
-     
-        <Header />
-      
       <div>Dashboard</div>
-      <Footer />
     </div>
   );
 }

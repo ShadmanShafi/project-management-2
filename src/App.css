@@ -121,7 +121,6 @@
 }
 
 .footer {
-  margin-top: 64%;
   min-height: 3vh;
   background-color: #147d94;
   color: rgb(242, 242, 242);
@@ -133,6 +132,8 @@
 
 .dashboard {
   background-color: red;
+
+  min-height: 85vh;
 }
 
 .violet {
