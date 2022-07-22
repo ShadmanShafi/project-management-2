@@ -1,15 +1,26 @@
-import {
-  useState,
-  useEffect,
-  createContext,
-  useContext,
-} from "react";
+import { useState, useEffect, createContext, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { v4 } from "uuid";
 
 const initialState = {
   name: "",
-  taskList: [],
+  taskList: [
+    {
+      uid: 1,
+      title: "First Task",
+      member: "Jotaro",
+    },
+    {
+      uid: 2,
+      title: "Second Task",
+      member: "Kuujo",
+    },
+    {
+      uid: 3,
+      title: "Third Task",
+      member: "joseph",
+    },
+  ],
   memberList: [],
 };
 
