@@ -19,20 +19,12 @@ const UserContext = createContext({
 });
 
 export function MyProvider({ children }) {
-  const [state, updateState] = useState(initialState);
+  const getLocalItems = () => {
+    let list = localStorage.getItem("taskManagementStore");
+    return list ? JSON.parse(list) : initialState;
+  };
+  const [state, updateState] = useState(getLocalItems());
   const navigate = useNavigate();
-
-  // const getLocalItems = () => {
-  //   let list = localStorage.getItem("taskManagementStore");
-  //   return list ? JSON.parse(list) : initialState;
-  // };
-
-  useEffect(() => {
-    const taskManagementStore = JSON.parse(
-      localStorage.getItem("taskManagementStore")
-    );
-    if (taskManagementStore) updateState(taskManagementStore);
-  }, []);
 
   useEffect(() => {
     localStorage.setItem("taskManagementStore", JSON.stringify(state));

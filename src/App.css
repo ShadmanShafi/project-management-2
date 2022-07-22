@@ -169,7 +169,33 @@
 
 .tasks {
   min-height: 85vh;
-  background-color: bisque;
+  padding: 30px;
+}
+
+.tasks-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.tasks-bold-text {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.tasks-text {
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.tasks-button {
+  margin: 0 0 0 30px;
+  width: 90px;
+  height: 35px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  background-color: rgba(144, 144, 144, 0.569);
+  border-radius: 6px;
 }
 
 .members {
