@@ -131,8 +131,40 @@
 }
 
 .dashboard {
-  background-color: silver;
   min-height: 85vh;
+  padding: 30px;
+}
+
+.dashboard-bold-text {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.dashboard-text {
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.dashboard-buttons-flex {
+  margin: 0 100px 0 100px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.dashboard-buttons {
+  color: rgb(242, 242, 242);
+  font-weight: 600;
+  height: 120px;
+  width: 280px;
+  font-size: 20px;
+  border: none;
+  cursor: pointer;
+  background-color: #028dab;
+  border-radius: 8px;
+}
+
+.dashboard-buttons:hover {
+  background-color: #09aacd;
 }
 
 .tasks {

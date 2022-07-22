@@ -1,4 +1,9 @@
-import { useState, useEffect, createContext, useContext } from "react";
+import {
+  useState,
+  useEffect,
+  createContext,
+  useContext,
+} from "react";
 import { useNavigate } from "react-router-dom";
 import { v4 } from "uuid";
 
@@ -17,13 +22,20 @@ export function MyProvider({ children }) {
   const [state, updateState] = useState(initialState);
   const navigate = useNavigate();
 
+  // const getLocalItems = () => {
+  //   let list = localStorage.getItem("taskManagementStore");
+  //   return list ? JSON.parse(list) : initialState;
+  // };
+
   useEffect(() => {
-    const adminStore = JSON.parse(localStorage.getItem("adminStore"));
-    if (adminStore) updateState(adminStore);
+    const taskManagementStore = JSON.parse(
+      localStorage.getItem("taskManagementStore")
+    );
+    if (taskManagementStore) updateState(taskManagementStore);
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("adminStore", JSON.stringify(state));
+    localStorage.setItem("taskManagementStore", JSON.stringify(state));
   }, [state]);
 
   const setName = (newValue) => {
