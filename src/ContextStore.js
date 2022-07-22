@@ -23,8 +23,8 @@ export function MyProvider({ children }) {
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("adminStore", JSON.stringify(initialState));
-  }, [initialState]);
+    localStorage.setItem("adminStore", JSON.stringify(state));
+  }, [state]);
 
   const setName = (newValue) => {
     updateState({ ...state, name: newValue });

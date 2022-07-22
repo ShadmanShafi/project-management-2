@@ -1,11 +1,19 @@
-import React from 'react'
-import { useUserContext } from '../ContextStore'
+import React from "react";
+import { useUserContext } from "../ContextStore";
+import Header from "./Header";
+import Footer from "./Footer";
 
 export default function Dashboard() {
   const { name, setName } = useUserContext();
-  console.log(name)
+  console.log(name);
 
   return (
-    <div>Dashboard</div>
-  )
+    <div className="dashboard">
+     
+        <Header />
+      
+      <div>Dashboard</div>
+      <Footer />
+    </div>
+  );
 }
