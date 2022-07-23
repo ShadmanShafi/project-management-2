@@ -1,16 +1,39 @@
-import {
-  useState,
-  useEffect,
-  createContext,
-  useContext,
-} from "react";
+import { useState, useEffect, createContext, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { v4 } from "uuid";
 
 const initialState = {
   name: "",
-  taskList: [],
-  memberList: [],
+  taskList: [
+    {
+      uid: 1,
+      title: "First Task",
+      details: "Details of first task",
+      member: "TenZ",
+    },
+    {
+      uid: 2,
+      title: "Second Task",
+      details: "Details of second task",
+      member: "TenZ",
+    },
+    {
+      uid: 3,
+      title: "Third Task",
+      details: "Details of third task",
+      member: "Sinatraa",
+    },
+  ],
+  memberList: [{
+    uid: 1,
+    member: "Sinatraa",
+  },{
+    uid: 2,
+    member: "TenZ",
+  },{
+    uid: 3,
+    member: "Shroud",
+  }],
 };
 
 const UserContext = createContext({
@@ -19,20 +42,12 @@ const UserContext = createContext({
 });
 
 export function MyProvider({ children }) {
-  const [state, updateState] = useState(initialState);
+  const getLocalItems = () => {
+    let list = localStorage.getItem("taskManagementStore");
+    return list ? JSON.parse(list) : initialState;
+  };
+  const [state, updateState] = useState(getLocalItems());
   const navigate = useNavigate();
-
-  // const getLocalItems = () => {
-  //   let list = localStorage.getItem("taskManagementStore");
-  //   return list ? JSON.parse(list) : initialState;
-  // };
-
-  useEffect(() => {
-    const taskManagementStore = JSON.parse(
-      localStorage.getItem("taskManagementStore")
-    );
-    if (taskManagementStore) updateState(taskManagementStore);
-  }, []);
 
   useEffect(() => {
     localStorage.setItem("taskManagementStore", JSON.stringify(state));

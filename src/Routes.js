@@ -15,10 +15,10 @@ export default function () {
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/tasks" element={<Tasks />} />
       <Route path="/task-add" element={<TaskAdd />} />
-      <Route path="/task/:id" element={<TaskDetail />} />
+      <Route path="/task-detail-:id" element={<TaskDetail />} />
       <Route path="/members" element={<Members />} />
       <Route path="/member-add" element={<MemberAdd />} />
-      <Route path="/member/:id" element={<MemberDetail />} />
+      <Route path="/member-detail-:id" element={<MemberDetail />} />
     </Routes>
   );
 }
