@@ -18,7 +18,7 @@ export default function Home() {
 
   const validate = () => {
     if (!(form.name.trim().length > 0)) {
-      setErrors([{ msg: "Name cannot be empty" }]);
+      setErrors([{ msg: "*Name cannot be empty" }]);
       return false;
     }
     return true;

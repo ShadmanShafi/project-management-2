@@ -5,11 +5,14 @@ import { useUserContext } from "../ContextStore";
 export default function Tasks() {
   const navigate = useNavigate();
   const { taskList } = useUserContext();
-  console.log(taskList);
 
   const handleAddClick = () => {
     navigate("/task-add");
   };
+
+  const handleTaskItemClick = (id) => {
+    navigate(`/task-detail-${id}`)
+  }
 
   return (
     <div className="tasks">
@@ -22,7 +25,7 @@ export default function Tasks() {
       <br />
       <br />
       <div className="tasks-row">
-        <p className="tasks-bold-text">Here is all tasks:</p>
+        <p className="tasks-bold-text">Here are all tasks:</p>
         <button className="tasks-button" onClick={handleAddClick}>
           Add new
         </button>
@@ -36,9 +39,9 @@ export default function Tasks() {
           <li className="tasks-list-item" key={item.uid}>
             <div className="task-item-left">
               <p className="tasks-list-item-children no-underline">{item.uid}.</p>
-              <button className="tasks-list-item-children">{item.title}</button>
+              <button className="tasks-list-item-children tasks-list-item-children-hover" onClick={() => handleTaskItemClick(item.uid)}>{item.title}</button>
             </div>
-            <button className="tasks-list-item-children">{item.member}</button>
+            <button className="tasks-list-item-children tasks-list-item-children-hover">{item.member}</button>
           </li>
         ))}
       </ol> ) : (<h4 className="tasks-text">There are no tasks available.</h4>)}

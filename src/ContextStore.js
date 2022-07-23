@@ -8,20 +8,32 @@ const initialState = {
     {
       uid: 1,
       title: "First Task",
-      member: "Jotaro",
+      details: "Details of first task",
+      member: "TenZ",
     },
     {
       uid: 2,
       title: "Second Task",
-      member: "Kuujo",
+      details: "Details of second task",
+      member: "TenZ",
     },
     {
       uid: 3,
       title: "Third Task",
-      member: "joseph",
+      details: "Details of third task",
+      member: "Sinatraa",
     },
   ],
-  memberList: [],
+  memberList: [{
+    uid: 1,
+    member: "Sinatraa",
+  },{
+    uid: 2,
+    member: "TenZ",
+  },{
+    uid: 3,
+    member: "Shroud",
+  }],
 };
 
 const UserContext = createContext({
