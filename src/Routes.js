@@ -4,6 +4,7 @@ import Home from "./Components/Home";
 import MemberAdd from "./Components/MemberAdd";
 import MemberDetail from "./Components/MemberDetail";
 import Members from "./Components/Members";
+import NotFound from "./Components/NotFound";
 import TaskAdd from "./Components/TaskAdd";
 import TaskDetail from "./Components/TaskDetail";
 import Tasks from "./Components/Tasks";
@@ -20,6 +21,7 @@ export default function () {
       <Route path="/members" element={<PrivateRoutes><Members /></PrivateRoutes>} />
       <Route path="/member-add" element={<PrivateRoutes><MemberAdd /></PrivateRoutes>} />
       <Route path="/member-detail-:id" element={<PrivateRoutes><MemberDetail /></PrivateRoutes>} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }

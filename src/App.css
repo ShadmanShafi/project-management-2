@@ -304,6 +304,17 @@
   background-color: grey;
 }
 
+
+.not-found {
+  min-height: 85vh;
+  max-height: 85vh;
+  min-width: stretch;
+  max-width: stretch;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .violet {
   background-color: blueviolet;
 }
