@@ -23,6 +23,10 @@ export default function TaskDetail() {
     navigate(-1);
   } 
 
+  const handleEditTaskClick = () => {
+
+  }
+
   return (
     <div className="task-detail">
       <div className="task-detail-buttons">
@@ -30,7 +34,7 @@ export default function TaskDetail() {
         ← Back
         </button>
         <div>
-          <button className="task-detail-right-btns">Edit</button>
+          <button className="task-detail-right-btns" onClick={handleEditTaskClick}>Edit</button>
           <button className="task-detail-right-btns" onClick={handleDeleteTaskClick}>Delete</button>
         </div>
       </div>

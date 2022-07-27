@@ -2,7 +2,7 @@ import { useUserContext } from "../ContextStore";
 import { useNavigate, useParams } from "react-router-dom";
 
 export default function MemberDetail() {
-  const { taskList, memberList } = useUserContext();
+  const { taskList, memberList, deleteMember } = useUserContext();
   const { id } = useParams();
   const navigate = useNavigate();
   let listId = 0;
@@ -19,6 +19,16 @@ export default function MemberDetail() {
     navigate(`/task-detail-${id}`);
   };
 
+  const handleDeleteMemberClick = () => {
+    // console.log(currentMember)
+    deleteMember(currentMember);
+    navigate(-1);
+  }
+
+  const handleEditMemberClick = () => {
+
+  }
+
   return (
     <div className="task-detail">
       <div className="task-detail-buttons">
@@ -26,8 +36,8 @@ export default function MemberDetail() {
         ← Back
         </button>
         <div>
-          <button className="task-detail-right-btns">Edit</button>
-          <button className="task-detail-right-btns">Delete</button>
+          <button className="task-detail-right-btns" onClick={handleEditMemberClick}>Edit</button>
+          <button className="task-detail-right-btns" onClick={handleDeleteMemberClick}>Delete</button>
         </div>
       </div>
       <br />

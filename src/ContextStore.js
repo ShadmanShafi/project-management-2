@@ -104,9 +104,9 @@ export function MyProvider({ children }) {
   };
 
   const setMemberList = (newValue) => {
-    const uid = v4();
+    const id = v4();
     const array = [...state.memberList];
-    array.push({ id: uid, ...newValue });
+    array.push({ uid: id, ...newValue });
     updateState({ ...state, memberList: array });
   };
 

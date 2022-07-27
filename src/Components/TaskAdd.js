@@ -13,7 +13,6 @@ export default function TaskAdd() {
 
   const onChangeFormValue = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
-    console.log(form.member);
   };
 
   const formIsValid = form.title.trim().length > 0;
