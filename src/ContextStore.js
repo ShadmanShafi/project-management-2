@@ -6,33 +6,42 @@ const initialState = {
   name: "",
   taskList: [
     {
-      uid: 1,
+      uid: "1",
       title: "First Task",
       details: "Details of first task",
       member: "TenZ",
     },
     {
-      uid: 2,
+      uid: "2",
       title: "Second Task",
       details: "Details of second task",
       member: "TenZ",
     },
     {
-      uid: 3,
+      uid: "3",
       title: "Third Task",
       details: "Details of third task",
       member: "Sinatraa",
     },
+    {
+      uid: "4",
+      title: "Delete Task",
+      details: "Details of Delete this task",
+      member: "Delete",
+    },
   ],
   memberList: [{
-    uid: 1,
+    uid: "1",
     member: "Sinatraa",
   },{
-    uid: 2,
+    uid: "2",
     member: "TenZ",
   },{
-    uid: 3,
+    uid: "3",
     member: "Shroud",
+  },{
+    uid: "4",
+    member: "Delete",
   }],
 };
 
@@ -51,6 +60,7 @@ export function MyProvider({ children }) {
 
   useEffect(() => {
     localStorage.setItem("taskManagementStore", JSON.stringify(state));
+    console.log(state);
   }, [state]);
 
   const setName = (newValue) => {
@@ -64,9 +74,9 @@ export function MyProvider({ children }) {
   };
 
   const setTaskList = (newValue) => {
-    const uid = v4();
+    const id = v4();
     const array = [...state.taskList];
-    array.push({ id: uid, ...newValue });
+    array.push({ uid: id, ...newValue });
     updateState({ ...state, taskList: array });
   };
 
@@ -81,15 +91,15 @@ export function MyProvider({ children }) {
     updateState({ ...state, taskList: newList });
   };
 
-  const setInitialTask = () => {
-    updateState({ ...state, taskList: initialState.taskList });
-  };
+  // const setInitialTask = () => {
+  //   updateState({ ...state, taskList: initialState.taskList });
+  // };
 
-  const getTaskInfo = (id) =>
-    state.taskList.find((task) => task.id.toString() === id.toString());
+  // const getTaskInfo = (id) =>
+  //   state.taskList.find((task) => task.id.toString() === id.toString());
 
   const deleteTask = (task) => {
-    const newList = [...state.taskList].filter((item) => item.id !== task.id);
+    const newList = [...state.taskList].filter((item) => item.uid !== task);
     updateState({ ...state, taskList: newList });
   };
 
@@ -111,12 +121,12 @@ export function MyProvider({ children }) {
     updateState({ ...state, memberList: newList });
   };
 
-  const setInitialMember = () => {
-    updateState({ ...state, memberList: initialState.memberList });
-  };
+  // const setInitialMember = () => {
+  //   updateState({ ...state, memberList: initialState.memberList });
+  // };
 
-  const getMemberInfo = (id) =>
-    state.memberList.find((member) => member.id.toString() === id.toString());
+  // const getMemberInfo = (id) =>
+  //   state.memberList.find((member) => member.id.toString() === id.toString());
 
   const deleteMember = (member) => {
     const newList = [...state.memberList].filter(
@@ -135,10 +145,6 @@ export function MyProvider({ children }) {
         updateTask,
         setMemberList,
         updateMember,
-        setInitialTask,
-        setInitialMember,
-        getTaskInfo,
-        getMemberInfo,
         deleteTask,
         deleteMember,
       }}
