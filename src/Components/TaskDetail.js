@@ -1,4 +1,3 @@
-import { useLayoutEffect } from "react";
 import { useUserContext } from "../ContextStore";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -22,7 +21,7 @@ export default function TaskDetail() {
     <div className="task-detail">
       <div className="task-detail-buttons">
         <button className="back-btn" onClick={handleBackClick}>
-          Back
+          Back to all Tasks
         </button>
         <div>
           <button className="task-detail-right-btns">Edit</button>

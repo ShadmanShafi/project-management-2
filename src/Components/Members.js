@@ -15,7 +15,10 @@ export default function Members() {
 
   return (
     <div className="tasks">
-      <p className="tasks-bold-text">All members</p>
+      <p className="tasks-bold-text">All Members</p>
+      <br />
+      <br />
+      <p className="tasks-text">You will find all members here.</p>
       <br />
       <br />
       <br />
@@ -31,11 +34,11 @@ export default function Members() {
       <br />
       {memberList.length > 0 ? (
         <ol type="1" className="tasks-list">
-          {memberList.map((item) => (
+          {memberList.map((item, index) => (
             <li className="tasks-list-item" key={item.uid}>
               <div className="task-item-left">
                 <p className="tasks-list-item-children no-underline">
-                  {item.uid}.
+                  {index+1}.
                 </p>
                 <button
                   className="tasks-list-item-children tasks-list-item-children-hover"
@@ -44,7 +47,7 @@ export default function Members() {
                   {item.member}
                 </button>
               </div>
-              <button className="tasks-list-item-children tasks-list-item-children-hover">
+              <button className="tasks-list-item-children tasks-list-item-children-no-hover">
                 {taskList.filter((task) => task.member === item.member).length} tasks
               </button>
             </li>

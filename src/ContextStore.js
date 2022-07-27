@@ -53,7 +53,6 @@ export function MyProvider({ children }) {
     localStorage.setItem("taskManagementStore", JSON.stringify(state));
   }, [state]);
 
-
   const setName = (newValue) => {
     updateState({ ...state, name: newValue });
   };
