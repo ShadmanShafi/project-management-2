@@ -129,7 +129,9 @@ export function MyProvider({ children }) {
     );
     updateState({ ...state, memberList: newList });
   };
-
+  const setTask = (task) => {
+    updateState({...state, task})
+  }
   return (
     <UserContext.Provider
       value={{
@@ -142,6 +144,7 @@ export function MyProvider({ children }) {
         updateMember,
         deleteTask,
         deleteMember,
+        setTask
       }}
     >
       {children}

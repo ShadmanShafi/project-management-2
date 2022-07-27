@@ -10,6 +10,7 @@ export default function Members() {
   };
 
   const handleMemberItemClick = (id) => {
+
     navigate(`/member-detail-${id}`);
   };
 
@@ -42,7 +43,7 @@ export default function Members() {
                 </p>
                 <button
                   className="tasks-list-item-children tasks-list-item-children-hover"
-                  onClick={() => handleMemberItemClick(item.uid)}
+                  onClick={() => handleMemberItemClick(item)}
                 >
                   {item.member}
                 </button>

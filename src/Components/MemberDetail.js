@@ -2,7 +2,7 @@ import { useUserContext } from "../ContextStore";
 import { useNavigate, useParams } from "react-router-dom";
 
 export default function MemberDetail() {
-  const { taskList, memberList, deleteMember } = useUserContext();
+  const { taskList, memberList, deleteMember, member } = useUserContext();
   const { id } = useParams();
   const navigate = useNavigate();
   let listId = 0;

@@ -2,24 +2,14 @@ import { useUserContext } from "../ContextStore";
 import { useNavigate, useParams } from "react-router-dom";
 
 export default function TaskDetail() {
-  const { taskList, deleteTask } = useUserContext();
-  const { id } = useParams();
+  const { taskList, deleteTask, task } = useUserContext();
   const navigate = useNavigate();
-
-  const currentTitle = taskList.find(
-    (item) => parseInt(item.uid) === parseInt(id)
-  );
-
-  const currentDetails = taskList.find(
-    (item) => parseInt(item.uid) === parseInt(id)
-  );
-
   const handleBackClick = () => {
     navigate(-1);
   };
 
   const handleDeleteTaskClick = () => {
-    deleteTask(id);
+    deleteTask(task.id);
     navigate(-1);
   } 
 
@@ -41,11 +31,11 @@ export default function TaskDetail() {
       <br />
       <br />
       <br />
-      <p className="tasks-bold-text">Task Name: {currentTitle.title}</p>
+      <p className="tasks-bold-text">Task Name: {task.title}</p>
       <br />
-      <p className="tasks-bold-text">Task Details: {currentDetails.details ? currentDetails.details : "Not Available"}</p>
+      <p className="tasks-bold-text">Task Details: {task.details ? task.details : "Not Available"}</p>
       <br />
-      <p className="tasks-bold-text">Member Assigned: {currentDetails.member}</p>
+      <p className="tasks-bold-text">Member Assigned: {task.member}</p>
     </div>
   );
 }

@@ -3,14 +3,15 @@ import { useUserContext } from "../ContextStore";
 
 export default function Tasks() {
   const navigate = useNavigate();
-  const { taskList, memberList } = useUserContext();
+  const { taskList, memberList, setTask } = useUserContext();
 
   const handleAddClick = () => {
     navigate("/task-add");
   };
 
-  const handleTaskItemClick = (id) => {
-    navigate(`/task-detail-${id}`)
+  const handleTaskItemClick = (item) => {
+    setTask(item)
+    navigate(`/task-detail`)
   }
 
   const handleMemberItemClick = (member) => {
@@ -46,7 +47,7 @@ export default function Tasks() {
           <li className="tasks-list-item" key={item.uid}>
             <div className="task-item-left">
               <p className="tasks-list-item-children no-underline">{index+1}.</p>
-              <button className="tasks-list-item-children tasks-list-item-children-hover" onClick={() => handleTaskItemClick(item.uid)}>{item.title}</button>
+              <button className="tasks-list-item-children tasks-list-item-children-hover" onClick={() => handleTaskItemClick(item)}>{item.title}</button>
             </div>
             <button className="tasks-list-item-children tasks-list-item-children-hover" onClick={() => handleMemberItemClick(item.member)}>{item.member}</button>
           </li>
