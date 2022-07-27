@@ -54,7 +54,7 @@ export default function Members() {
           ))}
         </ol>
       ) : (
-        <h4 className="tasks-text">There are no tasks available.</h4>
+        <h4 className="tasks-text">There are no members available.</h4>
       )}
     </div>
   );

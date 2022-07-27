@@ -43,7 +43,9 @@ export default function TaskDetail() {
       <br />
       <p className="tasks-bold-text">Task Name: {currentTitle.title}</p>
       <br />
-      <p className="tasks-text">Task Details: {currentDetails.details ? currentDetails.details : "Not Available"}</p>
+      <p className="tasks-bold-text">Task Details: {currentDetails.details ? currentDetails.details : "Not Available"}</p>
+      <br />
+      <p className="tasks-bold-text">Member Assigned: {currentDetails.member}</p>
     </div>
   );
 }

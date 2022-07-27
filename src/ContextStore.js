@@ -23,26 +23,21 @@ const initialState = {
       details: "Details of third task",
       member: "Sinatraa",
     },
+  ],
+  memberList: [
     {
-      uid: "4",
-      title: "Delete Task",
-      details: "Details of Delete this task",
-      member: "Delete",
+      uid: "1",
+      member: "Sinatraa",
+    },
+    {
+      uid: "2",
+      member: "TenZ",
+    },
+    {
+      uid: "3",
+      member: "Shroud",
     },
   ],
-  memberList: [{
-    uid: "1",
-    member: "Sinatraa",
-  },{
-    uid: "2",
-    member: "TenZ",
-  },{
-    uid: "3",
-    member: "Shroud",
-  },{
-    uid: "4",
-    member: "Delete",
-  }],
 };
 
 const UserContext = createContext({

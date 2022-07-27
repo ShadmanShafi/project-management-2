@@ -8,10 +8,15 @@ export default function TaskAdd() {
   const [form, setForm] = useState({
     title: "",
     details: "",
-    member: "ggh",
+    member: "",
   });
 
   const onChangeFormValue = (e) => {
+    console.log(e.target.value)
+    // if(e.target.name === "member"){
+    //   setForm({ ...form, [e.target.name]: JSON.parse(e.target.value) });
+    //   return
+    // }
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
@@ -55,13 +60,15 @@ export default function TaskAdd() {
       <br />
       <div className="task-add-row">
         <p className="dashboard-bold-text">Assigned to: </p>
-        <select className="dropdown">
+        <select className="dropdown" name="member" value={form.member} onChange={onChangeFormValue}>
+          <option selected hidden>
+            Please Select a value
+          </option>
           {memberList.map((item, key) => (
             <option className="dropdown"
               key={key}
-              value={form.member}
+              value={item.member}
               name="member"
-              onChange={onChangeFormValue}
             >
               {item.member}
             </option>
