@@ -10,8 +10,9 @@ export default function Tasks() {
   };
 
   const handleTaskItemClick = (item) => {
+    // console.log(item.uid)
     setTask(item)
-    navigate(`/task-detail`)
+    navigate(`/task-detail-${item.uid}`)
   }
 
   const handleMemberItemClick = (member) => {

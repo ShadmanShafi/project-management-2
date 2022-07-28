@@ -17,7 +17,7 @@ export default function () {
       <Route path="/dashboard" element={<PrivateRoutes> <Dashboard /> </PrivateRoutes>} />
       <Route path="/tasks" element={<PrivateRoutes><Tasks /></PrivateRoutes>} />
       <Route path="/task-add" element={<PrivateRoutes><TaskAdd /></PrivateRoutes>} />
-      <Route path="/task-detail" element={<PrivateRoutes><TaskDetail /></PrivateRoutes>} />
+      <Route path="/task-detail-:id" element={<PrivateRoutes><TaskDetail /></PrivateRoutes>} />
       <Route path="/members" element={<PrivateRoutes><Members /></PrivateRoutes>} />
       <Route path="/member-add" element={<PrivateRoutes><MemberAdd /></PrivateRoutes>} />
       <Route path="/member-detail-:id" element={<PrivateRoutes><MemberDetail /></PrivateRoutes>} />

@@ -94,7 +94,9 @@ export function MyProvider({ children }) {
   //   state.taskList.find((task) => task.id.toString() === id.toString());
 
   const deleteTask = (task) => {
-    const newList = [...state.taskList].filter((item) => item.uid !== task);
+    console.log(task)
+    const newList = state.taskList.filter((item) => item.uid !== task.uid);
+    console.log(newList)
     updateState({ ...state, taskList: newList });
   };
 
@@ -132,6 +134,13 @@ export function MyProvider({ children }) {
   const setTask = (task) => {
     updateState({...state, task})
   }
+  const editTask = (task) => {
+    const index = state.taskList.findIndex(vTask => vTask.uid === task.uid)
+    const vTasks = [...state.taskList]
+    vTasks[index] = task
+    updateState({...state, task, taskList: vTasks})
+
+  }
   return (
     <UserContext.Provider
       value={{
@@ -144,7 +153,9 @@ export function MyProvider({ children }) {
         updateMember,
         deleteTask,
         deleteMember,
-        setTask
+        setTask,
+        updateState,
+        editTask
       }}
     >
       {children}

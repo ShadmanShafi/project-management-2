@@ -43,7 +43,7 @@ export default function Members() {
                 </p>
                 <button
                   className="tasks-list-item-children tasks-list-item-children-hover"
-                  onClick={() => handleMemberItemClick(item)}
+                  onClick={() => handleMemberItemClick(item.uid)}
                 >
                   {item.member}
                 </button>
