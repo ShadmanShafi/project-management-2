@@ -1,16 +1,16 @@
-import { Modal } from 'bootstrap';
-import React from 'react'
-import ReactDOM from 'react-dom';
-import ReactModal from 'react-modal';
+import React from "react";
+import ReactModal from "react-modal";
 
-
-export default function DeleteTask({handleDelete, hideModal, showModal}) {
-  console.log("Hello from modal")
+export default function DeleteTask({ handleDelete, hideModal, showModal }) {
   return (
     <ReactModal isOpen={showModal}>
-      <text>Do you want to delete</text>
-      <button onClick={handleDelete}>Yes</button>
-      <button onClick={hideModal}>no</button>
+      <div className="modal-delete">
+        <text className="modal-text">Do you want to delete this item?</text>
+        <div className="modal-row">
+          <button className="modal-button" onClick={handleDelete}>Yes</button>
+          <button className="modal-button" onClick={hideModal}>no</button>
+        </div>
+      </div>
     </ReactModal>
-  )
+  );
 }

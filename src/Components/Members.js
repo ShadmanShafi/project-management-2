@@ -10,7 +10,6 @@ export default function Members() {
   };
 
   const handleMemberItemClick = (id) => {
-
     navigate(`/member-detail-${id}`);
   };
 
@@ -48,9 +47,9 @@ export default function Members() {
                   {item.member}
                 </button>
               </div>
-              <button className="tasks-list-item-children tasks-list-item-children-no-hover">
+              <p className="tasks-list-item-children tasks-list-item-children-no-hover">
                 {taskList.filter((task) => task.member === item.member).length} tasks
-              </button>
+              </p>
             </li>
           ))}
         </ol>

@@ -13,17 +13,14 @@ export default function TaskAdd() {
 
   const onChangeFormValue = (e) => {
     console.log(e.target.value)
-    // if(e.target.name === "member"){
-    //   setForm({ ...form, [e.target.name]: JSON.parse(e.target.value) });
-    //   return
-    // }
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   const formIsValid = form.title.trim().length > 0;
+  const MemberSelected = form.member.trim().length > 0;
 
   const handleSubmitClick = () => {
-    if (formIsValid) {
+    if (formIsValid && MemberSelected) {
       setTaskList(form);
       navigate(-1);
     }
@@ -43,9 +40,7 @@ export default function TaskAdd() {
         name="title"
         onChange={onChangeFormValue}
       ></textarea>
-      {!formIsValid && (
-        <p className="home-error-alert">*Task Name is required</p>
-      )}
+      {!formIsValid && (<p className="home-error-alert">*Task Name is required</p>)}
       <br />
       <br />
       <textarea
@@ -75,6 +70,7 @@ export default function TaskAdd() {
           ))}
         </select>
       </div>
+      {!MemberSelected && (<p className="home-error-alert">*Please select a Member</p>)}
       <br />
       <br />
       <div className="task-add-btn">

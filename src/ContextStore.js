@@ -75,28 +75,20 @@ export function MyProvider({ children }) {
     updateState({ ...state, taskList: array });
   };
 
-  const updateTask = (task) => {
-    const newList = state.taskList;
-    for (let i in newList) {
-      if (newList[i].id === task.id) {
-        newList[i] = task;
-        break;
-      }
-    }
-    updateState({ ...state, taskList: newList });
+  const getTaskInfo = (id) =>
+    state.taskList.find((task) => task.uid.toString() === id.toString());
+
+  const editTask = (task) => {
+    const index = state.taskList.findIndex((item) => item.uid === task.uid);
+    const items = [...state.taskList];
+    items[index] = task;
+    updateState({ ...state, taskList: items, task });
   };
 
-  // const setInitialTask = () => {
-  //   updateState({ ...state, taskList: initialState.taskList });
-  // };
-
-  // const getTaskInfo = (id) =>
-  //   state.taskList.find((task) => task.id.toString() === id.toString());
-
   const deleteTask = (task) => {
-    console.log(task)
+    console.log(task);
     const newList = state.taskList.filter((item) => item.uid !== task.uid);
-    console.log(newList)
+    console.log(newList);
     updateState({ ...state, taskList: newList });
   };
 
@@ -107,40 +99,23 @@ export function MyProvider({ children }) {
     updateState({ ...state, memberList: array });
   };
 
-  const updateMember = (member) => {
-    const newList = state.memberList;
-    for (let i in newList) {
-      if (newList[i].id === member.id) {
-        newList[i] = member;
-        break;
-      }
-    }
-    updateState({ ...state, memberList: newList });
+  const getMemberInfo = (id) =>
+    state.memberList.find((member) => member.uid.toString() === id.toString());
+
+  const editMember = (member) => {
+    const index = state.memberList.findIndex((item) => item.uid === member.uid);
+    const items = [...state.memberList];
+    items[index] = member;
+    updateState({ ...state, memberList: items, member });
+
+    // state.taskList.filter((item) => {if(item.member.member === member.member) console.log(item)})
   };
-
-  // const setInitialMember = () => {
-  //   updateState({ ...state, memberList: initialState.memberList });
-  // };
-
-  // const getMemberInfo = (id) =>
-  //   state.memberList.find((member) => member.id.toString() === id.toString());
 
   const deleteMember = (member) => {
-    const newList = [...state.memberList].filter(
-      (item) => item.id !== member.id
-    );
+    const newList = state.memberList.filter((item) => item.uid !== member.uid);
     updateState({ ...state, memberList: newList });
   };
-  const setTask = (task) => {
-    updateState({...state, task})
-  }
-  const editTask = (task) => {
-    const index = state.taskList.findIndex(vTask => vTask.uid === task.uid)
-    const vTasks = [...state.taskList]
-    vTasks[index] = task
-    updateState({...state, task, taskList: vTasks})
 
-  }
   return (
     <UserContext.Provider
       value={{
@@ -148,14 +123,13 @@ export function MyProvider({ children }) {
         setName,
         logout,
         setTaskList,
-        updateTask,
         setMemberList,
-        updateMember,
+        getTaskInfo,
+        getMemberInfo,
+        editTask,
+        editMember,
         deleteTask,
         deleteMember,
-        setTask,
-        updateState,
-        editTask
       }}
     >
       {children}

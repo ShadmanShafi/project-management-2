@@ -353,6 +353,44 @@
   background-color: grey;
 }
 
+.modal-delete {
+  background-color: #147d94;
+  min-height: 85vh;
+  gap: 20px;
+  display: flex;
+  border-radius: 6px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-row {
+  flex-direction: row;
+  gap: 20px;
+}
+
+.modal-button {
+  margin: 0 0 0 30px;
+  color: black;
+  height: 35px;
+  width: 100px;
+  font-size: 18px;
+  border: none;
+  cursor: pointer;
+  background-color: #c4c4c4;
+  border-radius: 6px;
+}
+
+.modal-button:hover {
+  background-color: #939393;
+}
+
+.modal-text {
+  font-size: 20px;
+  font-weight: 600;
+  color: white;
+} 
+
 .not-found {
   min-height: 85vh;
   max-height: 85vh;

@@ -3,25 +3,26 @@ import { useUserContext } from "../ContextStore";
 
 export default function Tasks() {
   const navigate = useNavigate();
-  const { taskList, memberList, setTask } = useUserContext();
+  const { taskList, memberList } = useUserContext();
 
-  const handleAddClick = () => {
+  const handleTaskAddClick = () => {
     navigate("/task-add");
   };
 
-  const handleTaskItemClick = (item) => {
-    // console.log(item.uid)
-    setTask(item)
-    navigate(`/task-detail-${item.uid}`)
+  const handleTaskItemClick = (id) => {
+    navigate(`/task-detail-${id}`)
   }
 
   const handleMemberItemClick = (member) => {
-    console.log(member);
     memberList.map(item => {
       if(item.member === member) 
         navigate(`/member-detail-${item.uid}`)
     })
   }
+
+  // const memberPresent = (member) => {
+  //   memberList.find(item => item.member ? member : "Member Deleted");
+  // }
 
   return (
     <div className="tasks">
@@ -35,7 +36,7 @@ export default function Tasks() {
       <br />
       <div className="tasks-row">
         <p className="tasks-bold-text">Here are all tasks:</p>
-        <button className="tasks-button" onClick={handleAddClick}>
+        <button className="tasks-button" onClick={handleTaskAddClick}>
           Add new
         </button>
       </div>
@@ -48,7 +49,7 @@ export default function Tasks() {
           <li className="tasks-list-item" key={item.uid}>
             <div className="task-item-left">
               <p className="tasks-list-item-children no-underline">{index+1}.</p>
-              <button className="tasks-list-item-children tasks-list-item-children-hover" onClick={() => handleTaskItemClick(item)}>{item.title}</button>
+              <button className="tasks-list-item-children tasks-list-item-children-hover" onClick={() => handleTaskItemClick(item.uid)}>{item.title}</button>
             </div>
             <button className="tasks-list-item-children tasks-list-item-children-hover" onClick={() => handleMemberItemClick(item.member)}>{item.member}</button>
           </li>
