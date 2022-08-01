@@ -157,7 +157,8 @@
 }
 
 .dashboard-buttons-flex {
-  margin: 0 100px 0 100px;
+  margin: 0 200px 0 200px;
+  gap: 40px;
   display: flex;
   justify-content: space-between;
 }
@@ -165,7 +166,7 @@
 .dashboard-buttons {
   color: rgb(242, 242, 242);
   font-weight: 600;
-  height: 120px;
+  height: 70px;
   width: 280px;
   font-size: 20px;
   border: none;
@@ -249,6 +250,10 @@
   background-color: #09aacd;
 }
 
+.tasks-list-item-children-no-hover {
+  cursor: default;
+}
+
 .task-item-left {
   display: flex;
   flex-direction: row;
@@ -271,7 +276,6 @@
   border: none;
   cursor: pointer;
   background-color: white;
-  text-decoration: underline;
 }
 .back-btn:hover {
   color: #09aacd;
@@ -299,19 +303,102 @@
   background-color: #939393;
 }
 
+.task-add {
+  min-height: 85vh;
+  padding: 30px;
+}
+
+.task-add-name {
+  min-height: fit-content;
+  max-height: 65px;
+  min-width: 91vw;
+  padding: 20px 30px 20px 30px;
+  font-size: 20px;
+  font-weight: 400;
+  color: #005568;
+}
+
+.task-add-detail {
+  min-height: 120px;
+  max-height: fit-content;
+  min-width: 91vw;
+  padding: 20px 30px 20px 30px;
+  font-size: 20px;
+  font-weight: 400;
+  color: #005568;
+}
+
+.task-add-row {
+  display: flex;
+  gap: 15px;
+}
+
+.task-add-btn {
+  margin: 0 6vw 0 0;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.dropdown {
+  background-color: rgb(242, 242, 242);
+  color:#147d94;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 6px;
+  border-radius: 6px;
+}
+
 .members {
   min-height: 85vh;
   background-color: grey;
 }
 
-.violet {
-  background-color: blueviolet;
+.modal-delete {
+  background-color: #147d94;
+  min-height: 85vh;
+  gap: 20px;
+  display: flex;
+  border-radius: 6px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.blue {
-  background-color: blue;
+.modal-row {
+  flex-direction: row;
+  gap: 20px;
 }
 
-.brown {
-  background-color: brown;
+.modal-button {
+  margin: 0 0 0 30px;
+  color: black;
+  height: 35px;
+  width: 100px;
+  font-size: 18px;
+  border: none;
+  cursor: pointer;
+  background-color: #c4c4c4;
+  border-radius: 6px;
+}
+
+.modal-button:hover {
+  background-color: #939393;
+}
+
+.modal-text {
+  font-size: 20px;
+  font-weight: 600;
+  color: white;
+} 
+
+.not-found {
+  min-height: 85vh;
+  max-height: 85vh;
+  min-width: stretch;
+  max-width: stretch;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #005568;
+  background-color: rgb(242, 242, 242);;
 }

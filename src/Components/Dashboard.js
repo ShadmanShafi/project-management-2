@@ -1,12 +1,11 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function Dashboard() {
   const navigate = useNavigate();
 
-  const handleButtonClick = navigateTo => {
+  const handleButtonClick = (navigateTo) => {
     navigate(navigateTo);
-  }
+  };
 
   return (
     <div className="dashboard">
@@ -31,8 +30,18 @@ export default function Dashboard() {
         <br />
       </div>
       <div className="dashboard-buttons-flex">
-        <button className="dashboard-buttons" onClick={() => handleButtonClick('/tasks')}>Tasks</button>
-        <button className="dashboard-buttons" onClick={() => handleButtonClick('/members')}>Members</button>
+        <button
+          className="dashboard-buttons"
+          onClick={() => handleButtonClick("/tasks")}
+        >
+          Tasks
+        </button>
+        <button
+          className="dashboard-buttons"
+          onClick={() => handleButtonClick("/members")}
+        >
+          Members
+        </button>
       </div>
     </div>
   );

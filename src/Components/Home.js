@@ -1,16 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useUserContext } from "../ContextStore";
 import { useNavigate } from "react-router-dom";
 
 export default function Home() {
   const [form, setForm] = useState({ name: "" });
   const [errors, setErrors] = useState([]);
-  const { name, setName } = useUserContext();
+  const { setName } = useUserContext();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (!name) navigate("/");
-  }, []);
 
   const onChangeInput = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -30,8 +26,6 @@ export default function Home() {
       navigate("/dashboard");
     }
   };
-
-  console.log(name);
 
   return (
     <div className="home">

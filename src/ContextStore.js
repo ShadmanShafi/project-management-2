@@ -6,34 +6,38 @@ const initialState = {
   name: "",
   taskList: [
     {
-      uid: 1,
+      uid: "1",
       title: "First Task",
       details: "Details of first task",
       member: "TenZ",
     },
     {
-      uid: 2,
+      uid: "2",
       title: "Second Task",
       details: "Details of second task",
       member: "TenZ",
     },
     {
-      uid: 3,
+      uid: "3",
       title: "Third Task",
       details: "Details of third task",
       member: "Sinatraa",
     },
   ],
-  memberList: [{
-    uid: 1,
-    member: "Sinatraa",
-  },{
-    uid: 2,
-    member: "TenZ",
-  },{
-    uid: 3,
-    member: "Shroud",
-  }],
+  memberList: [
+    {
+      uid: "1",
+      member: "Sinatraa",
+    },
+    {
+      uid: "2",
+      member: "TenZ",
+    },
+    {
+      uid: "3",
+      member: "Shroud",
+    },
+  ],
 };
 
 const UserContext = createContext({
@@ -51,6 +55,7 @@ export function MyProvider({ children }) {
 
   useEffect(() => {
     localStorage.setItem("taskManagementStore", JSON.stringify(state));
+    console.log(state);
   }, [state]);
 
   const setName = (newValue) => {
@@ -64,64 +69,50 @@ export function MyProvider({ children }) {
   };
 
   const setTaskList = (newValue) => {
-    const uid = v4();
+    const id = v4();
     const array = [...state.taskList];
-    array.push({ id: uid, ...newValue });
+    array.push({ uid: id, ...newValue });
     updateState({ ...state, taskList: array });
   };
 
-  const updateTask = (task) => {
-    const newList = state.taskList;
-    for (let i in newList) {
-      if (newList[i].id === task.id) {
-        newList[i] = task;
-        break;
-      }
-    }
-    updateState({ ...state, taskList: newList });
-  };
-
-  const setInitialTask = () => {
-    updateState({ ...state, taskList: initialState.taskList });
-  };
-
   const getTaskInfo = (id) =>
-    state.taskList.find((task) => task.id.toString() === id.toString());
+    state.taskList.find((task) => task.uid.toString() === id.toString());
+
+  const editTask = (task) => {
+    const index = state.taskList.findIndex((item) => item.uid === task.uid);
+    const items = [...state.taskList];
+    items[index] = task;
+    updateState({ ...state, taskList: items, task });
+  };
 
   const deleteTask = (task) => {
-    const newList = [...state.taskList].filter((item) => item.id !== task.id);
+    console.log(task);
+    const newList = state.taskList.filter((item) => item.uid !== task.uid);
+    console.log(newList);
     updateState({ ...state, taskList: newList });
   };
 
   const setMemberList = (newValue) => {
-    const uid = v4();
+    const id = v4();
     const array = [...state.memberList];
-    array.push({ id: uid, ...newValue });
+    array.push({ uid: id, ...newValue });
     updateState({ ...state, memberList: array });
   };
 
-  const updateMember = (member) => {
-    const newList = state.memberList;
-    for (let i in newList) {
-      if (newList[i].id === member.id) {
-        newList[i] = member;
-        break;
-      }
-    }
-    updateState({ ...state, memberList: newList });
-  };
-
-  const setInitialMember = () => {
-    updateState({ ...state, memberList: initialState.memberList });
-  };
-
   const getMemberInfo = (id) =>
-    state.memberList.find((member) => member.id.toString() === id.toString());
+    state.memberList.find((member) => member.uid.toString() === id.toString());
+
+  const editMember = (member) => {
+    const index = state.memberList.findIndex((item) => item.uid === member.uid);
+    const items = [...state.memberList];
+    items[index] = member;
+    updateState({ ...state, memberList: items, member });
+
+    // state.taskList.filter((item) => {if(item.member.member === member.member) console.log(item)})
+  };
 
   const deleteMember = (member) => {
-    const newList = [...state.memberList].filter(
-      (item) => item.id !== member.id
-    );
+    const newList = state.memberList.filter((item) => item.uid !== member.uid);
     updateState({ ...state, memberList: newList });
   };
 
@@ -132,13 +123,11 @@ export function MyProvider({ children }) {
         setName,
         logout,
         setTaskList,
-        updateTask,
         setMemberList,
-        updateMember,
-        setInitialTask,
-        setInitialMember,
         getTaskInfo,
         getMemberInfo,
+        editTask,
+        editMember,
         deleteTask,
         deleteMember,
       }}
