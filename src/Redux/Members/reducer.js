@@ -49,7 +49,8 @@ const membersReducer = (state = initialState, action) => {
       });
 
     case MEMBER_DELETE:
-      return state.filter((member) => member.id !== id);
+      console.log("action", action);
+      return state.filter((member) => member.id != action.payload);
 
     case LOGOUT:
       return [];

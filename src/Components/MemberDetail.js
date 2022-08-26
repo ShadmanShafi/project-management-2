@@ -1,31 +1,44 @@
 import { useState, useEffect, useMemo } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useUserContext } from "../ContextStore";
+
+import { useSelector, useDispatch } from "react-redux";
 import DeleteTask from "../Modals/DeleteTask";
+import { memberUpdate } from "../Redux/Members/actions";
+import { taskMemberUpdate } from "../Redux/Tasks/actions";
 
 export default function MemberDetail() {
   const navigate = useNavigate();
-  const { taskList, getMemberInfo, editMember, deleteMember } =
-    useUserContext();
+  const dispatch = useDispatch();
+  const memberList = useSelector((state) => state.members);
+  const taskList = useSelector((state) => state.tasks);
   const { id } = useParams();
   const [showModal, setShowModal] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
-  const currentMember = useMemo(() => getMemberInfo(id),[]);
   const [form, setForm] = useState({
-    uid: "",
-    member: "",
+    id: "",
+    name: "",
   });
 
+  const getMemberInfo = (id) =>
+    memberList.find((member) => member.id.toString() === id.toString());
+  const currentMember = useMemo(() => getMemberInfo(id), [id]);
+
   useEffect(() => {
-    if(currentMember) {
+    if (currentMember) {
       setForm({
-        uid: currentMember.uid,
-        member: currentMember.member,
+        id: currentMember.id,
+        name: currentMember.name,
       });
     }
   }, currentMember);
 
   let listId = 0;
+
+  const onChangeFormValue = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const formIsValid = form.name.trim().length > 0;
 
   const handleBackClick = () => {
     navigate(-1);
@@ -39,22 +52,24 @@ export default function MemberDetail() {
     setIsEditMode(true);
   };
 
-  const handleDeleteMemberClick = () => {
-    deleteMember(currentMember);
+  // const handleDeleteMemberClick = (id) => {
+  //   // deleteMember(currentMember);
+  //   navigate(-1);
+  //   dispatch(memberDelete(id));
+  // };
+
+  const handleUpdateMemberClick = (id, oldMemberName, newMemberName) => {
     navigate(-1);
-  };
-
-  const onChangeFormValue = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
-
-  const formIsValid = form.member.trim().length > 0;
+    dispatch(memberUpdate(id, newMemberName));
+    dispatch(taskMemberUpdate(oldMemberName, newMemberName));
+  }
 
   return (
     <div className="task-detail">
       {showModal && (
         <DeleteTask
-          handleDelete={handleDeleteMemberClick}
+          itemToDelete={"member"}
+          id={id}
           hideModal={() => {
             setShowModal(false);
           }}
@@ -71,7 +86,8 @@ export default function MemberDetail() {
               className="task-detail-right-btns"
               onClick={() => {
                 if (formIsValid) {
-                  editMember(form);
+                  // editMember(form);
+                  handleUpdateMemberClick(id, currentMember.name, form.name)
                   setIsEditMode(false);
                 }
               }}
@@ -114,8 +130,8 @@ export default function MemberDetail() {
           <textarea
             className="task-add-name"
             placeholder="Enter Member Name"
-            value={form.member}
-            name="member"
+            value={form.name}
+            name="name"
             onChange={onChangeFormValue}
           ></textarea>
           {!formIsValid && (
@@ -128,7 +144,7 @@ export default function MemberDetail() {
       )}
       {!isEditMode && (
         <div>
-          <p className="tasks-bold-text">{currentMember.member}</p>
+          <p className="tasks-bold-text">{currentMember.name}</p>
           <br />
           <br />
           <p className="tasks-text">List of tasks assigned:</p>
@@ -136,19 +152,19 @@ export default function MemberDetail() {
           <br />
           <ol type="1" className="tasks-list">
             {taskList.map((item) => {
-              if (item.member === currentMember.member) {
+              if (item.member === currentMember.name) {
                 {
                   listId++;
                 }
                 return (
-                  <li className="tasks-list-item" key={item.uid}>
+                  <li className="tasks-list-item" key={item.id}>
                     <div className="task-item-left">
                       <p className="tasks-list-item-children no-underline">
                         {listId}.
                       </p>
                       <button
                         className="tasks-list-item-children tasks-list-item-children-hover"
-                        onClick={() => handleTaskItemClick(item.uid)}
+                        onClick={() => handleTaskItemClick(item.id)}
                       >
                         {item.title}
                       </button>

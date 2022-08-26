@@ -49,7 +49,7 @@ export default function Members() {
                 </button>
               </div>
               <p className="tasks-list-item-children tasks-list-item-children-no-hover">
-                {taskList.filter((task) => task.member === item.member).length} tasks
+                {taskList.filter((task) => task.member === item.name).length} tasks
               </p>
             </li>
           ))}

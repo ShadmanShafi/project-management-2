@@ -18,7 +18,7 @@ export default function Tasks() {
 
   const handleMemberItemClick = (member) => {
     memberList.map((item) => {
-      if (item.member === member) navigate(`/member-detail-${item.id}`);
+      if (item.name === member) navigate(`/member-detail-${item.id}`);
     });
   };
 
