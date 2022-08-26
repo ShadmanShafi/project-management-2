@@ -20,10 +20,6 @@ export default function Tasks() {
     })
   }
 
-  // const memberPresent = (member) => {
-  //   memberList.find(item => item.member ? member : "Member Deleted");
-  // }
-
   return (
     <div className="tasks">
       <p className="tasks-bold-text">All Tasks</p>

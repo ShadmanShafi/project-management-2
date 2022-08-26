@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { useUserContext } from "../ContextStore";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { userAdd } from "../Redux/User/actions";
 
 export default function Home() {
   const [form, setForm] = useState({ name: "" });
   const [errors, setErrors] = useState([]);
-  const { setName } = useUserContext();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const onChangeInput = (e) => {
@@ -22,7 +23,7 @@ export default function Home() {
 
   const onClickSubmit = () => {
     if (validate()) {
-      setName(form.name);
+      dispatch(userAdd(form.name));
       navigate("/dashboard");
     }
   };

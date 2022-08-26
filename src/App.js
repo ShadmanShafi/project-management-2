@@ -1,16 +1,17 @@
 import "./App.css";
 import Routes from "./Routes";
-import { MyProvider } from "./ContextStore";
+import { Provider } from "react-redux";
+import store from "./Redux/store";
 import Layout from "./Layout";
 
 function App() {
   return (
     <div className="App">
-      <MyProvider>
+      <Provider store={store}>
         <Layout>
           <Routes />
         </Layout>
-      </MyProvider>
+      </Provider>
     </div>
   );
 }

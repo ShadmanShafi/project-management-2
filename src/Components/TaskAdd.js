@@ -17,10 +17,11 @@ export default function TaskAdd() {
   };
 
   const formIsValid = form.title.trim().length > 0;
-  const MemberSelected = form.member.trim().length > 0;
+  //const MemberSelected = form.member.trim().length > 0;
 
   const handleSubmitClick = () => {
-    if (formIsValid && MemberSelected) {
+    //if (formIsValid && MemberSelected) {
+    if (formIsValid) {
       setTaskList(form);
       navigate(-1);
     }
@@ -70,7 +71,7 @@ export default function TaskAdd() {
           ))}
         </select>
       </div>
-      {!MemberSelected && (<p className="home-error-alert">*Please select a Member</p>)}
+      {/* {!MemberSelected && (<p className="home-error-alert">*Please select a Member</p>)} */}
       <br />
       <br />
       <div className="task-add-btn">
