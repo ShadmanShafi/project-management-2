@@ -1,9 +1,10 @@
 import { useNavigate } from "react-router-dom";
-import { useUserContext } from "../ContextStore";
+import { useSelector } from "react-redux";
 
 export default function Members() {
   const navigate = useNavigate();
-  const { taskList, memberList } = useUserContext();
+  const memberList = useSelector((state) => state.members);
+  const taskList = useSelector((state) => state.tasks);
 
   const handleMemberAddClick = () => {
     navigate("/member-add");
@@ -35,16 +36,16 @@ export default function Members() {
       {memberList.length > 0 ? (
         <ol type="1" className="tasks-list">
           {memberList.map((item, index) => (
-            <li className="tasks-list-item" key={item.uid}>
+            <li className="tasks-list-item" key={item.id}>
               <div className="task-item-left">
                 <p className="tasks-list-item-children no-underline">
                   {index+1}.
                 </p>
                 <button
                   className="tasks-list-item-children tasks-list-item-children-hover"
-                  onClick={() => handleMemberItemClick(item.uid)}
+                  onClick={() => handleMemberItemClick(item.id)}
                 >
-                  {item.member}
+                  {item.name}
                 </button>
               </div>
               <p className="tasks-list-item-children tasks-list-item-children-no-hover">

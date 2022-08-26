@@ -1,13 +1,17 @@
 import { useNavigate } from "react-router-dom";
-import { useUserContext } from "../ContextStore";
+// import { useUserContext } from "../ContextStore";
+import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
+import { taskAdd } from "../Redux/Tasks/actions";
 
 export default function TaskAdd() {
   const navigate = useNavigate();
-  const { memberList, setTaskList } = useUserContext();
+  const dispatch = useDispatch();
+  // const { memberList, setTaskList } = useUserContext();
+  const memberList = useSelector((state) => state.members);
   const [form, setForm] = useState({
     title: "",
-    details: "",
+    description: "",
     member: "",
   });
 
@@ -17,12 +21,11 @@ export default function TaskAdd() {
   };
 
   const formIsValid = form.title.trim().length > 0;
-  //const MemberSelected = form.member.trim().length > 0;
 
   const handleSubmitClick = () => {
-    //if (formIsValid && MemberSelected) {
     if (formIsValid) {
-      setTaskList(form);
+      // setTaskList(form);
+      dispatch(taskAdd(form.title, form.description, form.member));
       navigate(-1);
     }
   };
@@ -46,9 +49,9 @@ export default function TaskAdd() {
       <br />
       <textarea
         className="task-add-detail"
-        placeholder="Enter Task Details"
-        value={form.details}
-        name="details"
+        placeholder="Enter Task Description"
+        value={form.description}
+        name="description"
         onChange={onChangeFormValue}
       ></textarea>
       <br />
@@ -63,10 +66,10 @@ export default function TaskAdd() {
           {memberList.map((item, key) => (
             <option className="dropdown"
               key={key}
-              value={item.member}
+              value={item.name}
               name="member"
             >
-              {item.member}
+              {item.name}
             </option>
           ))}
         </select>

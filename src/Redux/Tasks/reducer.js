@@ -1,12 +1,12 @@
 import { TASK_ADD, TASK_UPDATE, TASK_DELETE, LOGOUT } from "./actionTypes";
 
 const initialState = [
-  // {
-    // id: 1,
-    // title: "First todo",
-    // description: "This is the first task",
-    // member: "member",
-  // },
+  {
+    id: 1,
+    title: "First todo",
+    description: "This is the first task",
+    member: "member",
+  },
 ];
 
 //helper functions

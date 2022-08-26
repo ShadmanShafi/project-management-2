@@ -1,10 +1,13 @@
 import { useNavigate } from "react-router-dom";
-import { useUserContext } from "../ContextStore";
+// import { useUserContext } from "../ContextStore";
+import { useDispatch } from "react-redux";
 import { useState } from "react";
+import { memberAdd } from "../Redux/Members/actions";
 
 export default function MemberAdd() {
   const navigate = useNavigate();
-  const { setMemberList } = useUserContext();
+  const dispatch = useDispatch();
+  // const { setMemberList } = useUserContext();
 
   const [form, setForm] = useState({
     member: "",
@@ -18,7 +21,8 @@ export default function MemberAdd() {
 
   const handleSubmitClick = () => {
     if (formIsValid) {
-      setMemberList(form);
+      // setMemberList(form);
+      dispatch(memberAdd(form.member))
       navigate(-1);
     }
   };

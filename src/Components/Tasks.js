@@ -1,24 +1,26 @@
 import { useNavigate } from "react-router-dom";
-import { useUserContext } from "../ContextStore";
+// import { useUserContext } from "../ContextStore";
+import { useSelector } from "react-redux";
 
 export default function Tasks() {
   const navigate = useNavigate();
-  const { taskList, memberList } = useUserContext();
+  // const { taskList, memberList } = useUserContext();
+  const memberList = useSelector((state) => state.members);
+  const taskList = useSelector((state) => state.tasks);
 
   const handleTaskAddClick = () => {
     navigate("/task-add");
   };
 
   const handleTaskItemClick = (id) => {
-    navigate(`/task-detail-${id}`)
-  }
+    navigate(`/task-detail-${id}`);
+  };
 
   const handleMemberItemClick = (member) => {
-    memberList.map(item => {
-      if(item.member === member) 
-        navigate(`/member-detail-${item.uid}`)
-    })
-  }
+    memberList.map((item) => {
+      if (item.member === member) navigate(`/member-detail-${item.id}`);
+    });
+  };
 
   return (
     <div className="tasks">
@@ -40,17 +42,32 @@ export default function Tasks() {
       <br />
       <br />
       {taskList.length > 0 ? (
-      <ol type="1" className="tasks-list">
-        {taskList.map((item, index) => (
-          <li className="tasks-list-item" key={item.uid}>
-            <div className="task-item-left">
-              <p className="tasks-list-item-children no-underline">{index+1}.</p>
-              <button className="tasks-list-item-children tasks-list-item-children-hover" onClick={() => handleTaskItemClick(item.uid)}>{item.title}</button>
-            </div>
-            <button className="tasks-list-item-children tasks-list-item-children-hover" onClick={() => handleMemberItemClick(item.member)}>{item.member}</button>
-          </li>
-        ))}
-      </ol> ) : (<h4 className="tasks-text">There are no tasks available.</h4>)}
+        <ol type="1" className="tasks-list">
+          {taskList.map((item, index) => (
+            <li className="tasks-list-item" key={item.id}>
+              <div className="task-item-left">
+                <p className="tasks-list-item-children no-underline">
+                  {index + 1}.
+                </p>
+                <button
+                  className="tasks-list-item-children tasks-list-item-children-hover"
+                  onClick={() => handleTaskItemClick(item.id)}
+                >
+                  {item.title}
+                </button>
+              </div>
+              <button
+                className="tasks-list-item-children tasks-list-item-children-hover"
+                onClick={() => handleMemberItemClick(item.member)}
+              >
+                {item.member}
+              </button>
+            </li>
+          ))}
+        </ol>
+      ) : (
+        <h4 className="tasks-text">There are no tasks available.</h4>
+      )}
     </div>
   );
 }

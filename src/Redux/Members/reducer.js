@@ -6,10 +6,14 @@ import {
 } from "./actionTypes";
 
 const initialState = [
-  // {
-    // id: 1,
-    // name: "Sinatraa",
-  // },
+  {
+    id: 1,
+    name: "Sinatraa",
+  },
+  {
+    id: 2,
+    name: "TenZ",
+  },
 ];
 
 //helper functions
