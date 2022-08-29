@@ -1,23 +1,16 @@
 import {
   TASK_ADD,
+  TASK_GET,
   TASK_UPDATE,
   TASK_MEMBER_UPDATE,
   TASK_DELETE,
   LOGOUT,
 } from "./actionTypes";
 
-const initialState = [
-  // {
-  //   id: 1,
-  //   title: "First todo",
-  //   description: "This is the first task",
-  //   member: "member",
-  // },
-];
-// {
-//   tasks: [],
-//   task: {}
-// }
+const initialState = {
+  tasks: [],
+  task: {},
+};
 
 //helper functions
 const nextTaskId = (tasks) => {
@@ -28,48 +21,63 @@ const nextTaskId = (tasks) => {
 const tasksReducer = (state = initialState, action) => {
   switch (action.type) {
     case TASK_ADD:
+      console.log("Task Add");
       const { title, description, member } = action.payload;
-      return [
+      const array = [...state.tasks];
+      array.push({ id: nextTaskId(state.tasks), title, description, member });
+      return {
         ...state,
-        {
-          id: nextTaskId(state),
-          title,
-          description,
-          member,
-        },
-      ];
+        tasks: array,
+      };
 
-    case TASK_UPDATE:
-      const { id } = action.payload;
-      return state.map((task) => {
-        if (task.id != id) {
-          return task;
-        }
-        return {
-          ...task,
+    case TASK_GET:
+      return {
+        ...state,
+        task: {
+          id: action.payload.id,
           title: action.payload.title,
           description: action.payload.description,
           member: action.payload.member,
-        };
-      });
+        },
+      };
+
+    case TASK_UPDATE:
+      const { id } = action.payload;
+      const items = [...state.tasks];
+      items[id].title = action.payload.title;
+      items[id].description = action.payload.description;
+      items[id].member = action.payload.member;
+      return {
+        ...state,
+        tasks: items,
+      };
 
     case TASK_MEMBER_UPDATE:
       const { oldMemberName, newMemberName } = action.payload;
-      return state.map((task) => {
+      const arr = [...state.tasks];
+      arr.map(task => {
         if (task.member !== oldMemberName) {
           return task;
         }
         return {
           ...task,
           member: newMemberName,
-        };
-      });
+        }
+      })
+      return {
+        ...state,
+        tasks: arr,
+      };
 
     case TASK_DELETE:
-      return state.filter((task) => task.id != action.payload);
+      const arra = state.tasks.filter((task) => task.id != action.payload);
+      return {
+        ...state,
+        tasks: arra,
+      }
 
     case LOGOUT:
-      return [];
+      return initialState;
 
     default:
       return state;

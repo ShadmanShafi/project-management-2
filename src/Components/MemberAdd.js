@@ -22,8 +22,8 @@ export default function MemberAdd() {
   const handleSubmitClick = () => {
     if (formIsValid) {
       // setMemberList(form);
-      dispatch(memberAdd(form.member))
       navigate(-1);
+      dispatch(memberAdd(form.member))
     }
   };
 

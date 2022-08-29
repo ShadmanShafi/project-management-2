@@ -1,20 +1,20 @@
 import {
   MEMBER_ADD,
+  MEMBER_GET,
   MEMBER_UPDATE,
   MEMBER_DELETE,
   LOGOUT,
 } from "./actionTypes";
 
-const initialState = [
+const initialState =
+  // [
+  //   {id: 1, name: "Sinatraa",},
+  //   {id: 2, name: "TenZ",},
+  // ];
   {
-    id: 1,
-    name: "Sinatraa",
-  },
-  {
-    id: 2,
-    name: "TenZ",
-  },
-];
+    members: [],
+    member: {},
+  };
 
 //helper functions
 const nextMemberId = (members) => {
@@ -28,32 +28,38 @@ const nextMemberId = (members) => {
 const membersReducer = (state = initialState, action) => {
   switch (action.type) {
     case MEMBER_ADD:
-      return [
+      const array = [...state.members];
+      array.push({ id: nextMemberId(state.members), name: action.payload });
+      return {
         ...state,
-        {
-          id: nextMemberId(state),
-          name: action.payload,
-        },
-      ];
+        members: array,
+      };
+
+    case MEMBER_GET:
+      return {
+        ...state,
+        member: {id: action.payload.id, name: action.payload.name,}
+      }
 
     case MEMBER_UPDATE:
       const { id, name } = action.payload;
-      return state.map((member) => {
-        if (member.id != id) {
-          return member;
-        }
-        return {
-          ...member,
-          name,
-        };
-      });
+      // const index = state.members.findIndex((item) => item.id === id);
+      const items = [...state.members];
+      items[id].name = name;
+      return {
+        ...state,
+        members: items,
+      };
 
     case MEMBER_DELETE:
-      console.log("action", action);
-      return state.filter((member) => member.id != action.payload);
+      const arr = state.members.filter(item => item.id != action.payload);
+      return {
+        ...state,
+        members: arr,
+      };
 
     case LOGOUT:
-      return [];
+      return initialState;
 
     default:
       return state;

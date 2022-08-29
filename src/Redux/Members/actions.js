@@ -1,5 +1,6 @@
 import {
   MEMBER_ADD,
+  MEMBER_GET,
   MEMBER_UPDATE,
   MEMBER_DELETE,
   LOGOUT,
@@ -9,6 +10,16 @@ export const memberAdd = (name) => {
   return {
     type: MEMBER_ADD,
     payload: name,
+  };
+};
+
+export const memberGet = (id, name) => {
+  return {
+    type: MEMBER_GET,
+    payload: {
+      id,
+      name,
+    },
   };
 };
 
@@ -23,6 +34,7 @@ export const memberUpdate = (id, name) => {
 };
 
 export const memberDelete = (id) => {
+  // console.log(id)
   return {
     type: MEMBER_DELETE,
     payload: id,

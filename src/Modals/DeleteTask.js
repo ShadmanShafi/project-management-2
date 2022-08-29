@@ -12,6 +12,7 @@ export default function DeleteTask({ itemToDelete, id, hideModal, showModal }) {
   const handleDeleteClick = (itemToDelete, id) => {
     navigate(-1);
     if (itemToDelete === "member") {
+      // console.log(id);
       dispatch(memberDelete(id));
     } else if (itemToDelete === "task") {
       dispatch(taskDelete(id));

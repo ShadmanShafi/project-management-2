@@ -1,6 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-
 import { useSelector, useDispatch } from "react-redux";
 import DeleteTask from "../Modals/DeleteTask";
 import { memberUpdate } from "../Redux/Members/actions";
@@ -9,8 +8,8 @@ import { taskMemberUpdate } from "../Redux/Tasks/actions";
 export default function MemberDetail() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const memberList = useSelector((state) => state.members);
-  const taskList = useSelector((state) => state.tasks);
+  const currentMember = useSelector((state) => state.members.member);
+  const taskList = useSelector((state) => state.tasks.tasks);
   const { id } = useParams();
   const [showModal, setShowModal] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
@@ -18,10 +17,10 @@ export default function MemberDetail() {
     id: "",
     name: "",
   });
-
-  const getMemberInfo = (id) =>
-    memberList.find((member) => member.id.toString() === id.toString());
-  const currentMember = useMemo(() => getMemberInfo(id), [id]);
+  
+  // console.log(currentMember);
+  // const getMemberInfo = (id) => memberList.find((member) => member.id == id);
+  // const currentMember = useMemo(() => getMemberInfo(id), [id]);
 
   useEffect(() => {
     if (currentMember) {
@@ -52,17 +51,11 @@ export default function MemberDetail() {
     setIsEditMode(true);
   };
 
-  // const handleDeleteMemberClick = (id) => {
-  //   // deleteMember(currentMember);
-  //   navigate(-1);
-  //   dispatch(memberDelete(id));
-  // };
-
   const handleUpdateMemberClick = (id, oldMemberName, newMemberName) => {
     navigate(-1);
     dispatch(memberUpdate(id, newMemberName));
     dispatch(taskMemberUpdate(oldMemberName, newMemberName));
-  }
+  };
 
   return (
     <div className="task-detail">
@@ -87,7 +80,7 @@ export default function MemberDetail() {
               onClick={() => {
                 if (formIsValid) {
                   // editMember(form);
-                  handleUpdateMemberClick(id, currentMember.name, form.name)
+                  handleUpdateMemberClick(currentMember.id, currentMember.name, form.name);
                   setIsEditMode(false);
                 }
               }}

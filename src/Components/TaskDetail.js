@@ -2,13 +2,13 @@ import { useState, useEffect, useMemo } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import DeleteTask from "../Modals/DeleteTask";
-import { taskUpdate, taskDelete } from "../Redux/Tasks/actions";
+import { taskUpdate } from "../Redux/Tasks/actions";
 
 export default function TaskDetail() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const taskList = useSelector((state) => state.tasks);
-  const memberList = useSelector((state) => state.members);
+  const currentTask = useSelector((state) => state.tasks.task);
+  const memberList = useSelector((state) => state.members.members);
   const { id } = useParams();
   const [showModal, setShowModal] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
@@ -19,9 +19,9 @@ export default function TaskDetail() {
     member: "",
   });
 
-  const getTaskInfo = (id) =>
-    taskList.find((task) => task.id.toString() === id.toString());
-  const currentTask = useMemo(() => getTaskInfo(id), [id]);
+  // const getTaskInfo = (id) =>
+  //   taskList.find((task) => task.id.toString() === id.toString());
+  // const currentTask = useMemo(() => getTaskInfo(id), [id]);
 
   useEffect(() => {
     if (currentTask) {
@@ -34,6 +34,12 @@ export default function TaskDetail() {
     }
   }, currentTask);
 
+  const onChangeFormValue = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const formIsValid = form.title.trim().length > 0;
+
   const handleBackClick = () => {
     navigate(-1);
   };
@@ -41,18 +47,6 @@ export default function TaskDetail() {
   const handleEditTaskClick = () => {
     setIsEditMode(true);
   };
-
-  // const handleDeleteTaskClick = () => {
-  //   // deleteTask(currentTask);
-  //   dispatch(taskDelete(id));
-  //   navigate(-1);
-  // };
-
-  const onChangeFormValue = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
-
-  const formIsValid = form.title.trim().length > 0;
 
   const handleUpdateTaskClick = (id, title, description, member) => {
     navigate(-1);

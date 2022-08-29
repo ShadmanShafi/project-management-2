@@ -1,17 +1,20 @@
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { memberGet } from "../Redux/Members/actions"; 
 
 export default function Members() {
   const navigate = useNavigate();
-  const memberList = useSelector((state) => state.members);
-  const taskList = useSelector((state) => state.tasks);
+  const dispatch = useDispatch();
+  const memberList = useSelector((state) => state.members.members);
+  const taskList = useSelector((state) => state.tasks.tasks);
 
   const handleMemberAddClick = () => {
     navigate("/member-add");
   };
 
-  const handleMemberItemClick = (id) => {
+  const handleMemberItemClick = (id, name) => {
     navigate(`/member-detail-${id}`);
+    dispatch(memberGet(id, name))
   };
 
   return (
@@ -43,7 +46,7 @@ export default function Members() {
                 </p>
                 <button
                   className="tasks-list-item-children tasks-list-item-children-hover"
-                  onClick={() => handleMemberItemClick(item.id)}
+                  onClick={() => handleMemberItemClick(item.id, item.name)}
                 >
                   {item.name}
                 </button>

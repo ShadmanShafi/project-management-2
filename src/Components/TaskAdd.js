@@ -8,7 +8,7 @@ export default function TaskAdd() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   // const { memberList, setTaskList } = useUserContext();
-  const memberList = useSelector((state) => state.members);
+  const memberList = useSelector((state) => state.members.members);
   const [form, setForm] = useState({
     title: "",
     description: "",
@@ -25,8 +25,8 @@ export default function TaskAdd() {
   const handleSubmitClick = () => {
     if (formIsValid) {
       // setTaskList(form);
-      dispatch(taskAdd(form.title, form.description, form.member));
       navigate(-1);
+      dispatch(taskAdd(form.title, form.description, form.member));
     }
   };
 

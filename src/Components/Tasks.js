@@ -1,24 +1,29 @@
 import { useNavigate } from "react-router-dom";
-// import { useUserContext } from "../ContextStore";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { taskGet } from "../Redux/Tasks/actions";
+import { memberGet } from "../Redux/Members/actions";
 
 export default function Tasks() {
   const navigate = useNavigate();
-  // const { taskList, memberList } = useUserContext();
-  const memberList = useSelector((state) => state.members);
-  const taskList = useSelector((state) => state.tasks);
+  const dispatch = useDispatch();
+  const memberList = useSelector((state) => state.members.members);
+  const taskList = useSelector((state) => state.tasks.tasks);
 
   const handleTaskAddClick = () => {
     navigate("/task-add");
   };
 
-  const handleTaskItemClick = (id) => {
+  const handleTaskItemClick = (id, title, description, member) => {
     navigate(`/task-detail-${id}`);
+    dispatch(taskGet(id, title, description, member));
   };
 
   const handleMemberItemClick = (member) => {
     memberList.map((item) => {
-      if (item.name === member) navigate(`/member-detail-${item.id}`);
+      if (item.name === member) {
+        navigate(`/member-detail-${item.id}`);
+        dispatch(memberGet(item.id, item.name));
+      }
     });
   };
 
@@ -51,7 +56,14 @@ export default function Tasks() {
                 </p>
                 <button
                   className="tasks-list-item-children tasks-list-item-children-hover"
-                  onClick={() => handleTaskItemClick(item.id)}
+                  onClick={() =>
+                    handleTaskItemClick(
+                      item.id,
+                      item.title,
+                      item.description,
+                      item.member
+                    )
+                  }
                 >
                   {item.title}
                 </button>
