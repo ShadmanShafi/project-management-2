@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import DeleteTask from "../Modals/DeleteTask";
 import { memberUpdate } from "../Redux/Members/actions";
-import { taskMemberUpdate } from "../Redux/Tasks/actions";
+import { taskGet, taskMemberUpdate } from "../Redux/Tasks/actions";
 
 export default function MemberDetail() {
   const navigate = useNavigate();
@@ -17,10 +17,6 @@ export default function MemberDetail() {
     id: "",
     name: "",
   });
-  
-  // console.log(currentMember);
-  // const getMemberInfo = (id) => memberList.find((member) => member.id == id);
-  // const currentMember = useMemo(() => getMemberInfo(id), [id]);
 
   useEffect(() => {
     if (currentMember) {
@@ -43,8 +39,9 @@ export default function MemberDetail() {
     navigate(-1);
   };
 
-  const handleTaskItemClick = (id) => {
+  const handleTaskItemClick = (id, title, description, member) => {
     navigate(`/task-detail-${id}`);
+    dispatch(taskGet(id, title, description, member));
   };
 
   const handleEditMemberClick = () => {
@@ -79,8 +76,11 @@ export default function MemberDetail() {
               className="task-detail-right-btns"
               onClick={() => {
                 if (formIsValid) {
-                  // editMember(form);
-                  handleUpdateMemberClick(currentMember.id, currentMember.name, form.name);
+                  handleUpdateMemberClick(
+                    currentMember.id,
+                    currentMember.name,
+                    form.name
+                  );
                   setIsEditMode(false);
                 }
               }}
@@ -157,7 +157,14 @@ export default function MemberDetail() {
                       </p>
                       <button
                         className="tasks-list-item-children tasks-list-item-children-hover"
-                        onClick={() => handleTaskItemClick(item.id)}
+                        onClick={() =>
+                          handleTaskItemClick(
+                            item.id,
+                            item.title,
+                            item.description,
+                            item.member
+                          )
+                        }
                       >
                         {item.title}
                       </button>

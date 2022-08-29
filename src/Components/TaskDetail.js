@@ -19,10 +19,6 @@ export default function TaskDetail() {
     member: "",
   });
 
-  // const getTaskInfo = (id) =>
-  //   taskList.find((task) => task.id.toString() === id.toString());
-  // const currentTask = useMemo(() => getTaskInfo(id), [id]);
-
   useEffect(() => {
     if (currentTask) {
       setForm({
@@ -75,7 +71,6 @@ export default function TaskDetail() {
               className="task-detail-right-btns"
               onClick={() => {
                 if (formIsValid) {
-                  // editTask(form);
                   handleUpdateTaskClick(
                     id,
                     form.title,
@@ -167,9 +162,6 @@ export default function TaskDetail() {
               ))}
             </select>
           </div>
-          {/* {!MemberSelected && (
-            <p className="home-error-alert">*Please select a Member</p>
-          )} */}
         </div>
       )}
       {!isEditMode && (

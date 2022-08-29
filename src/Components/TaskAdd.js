@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-// import { useUserContext } from "../ContextStore";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import { taskAdd } from "../Redux/Tasks/actions";
@@ -7,7 +6,6 @@ import { taskAdd } from "../Redux/Tasks/actions";
 export default function TaskAdd() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  // const { memberList, setTaskList } = useUserContext();
   const memberList = useSelector((state) => state.members.members);
   const [form, setForm] = useState({
     title: "",
@@ -24,7 +22,6 @@ export default function TaskAdd() {
 
   const handleSubmitClick = () => {
     if (formIsValid) {
-      // setTaskList(form);
       navigate(-1);
       dispatch(taskAdd(form.title, form.description, form.member));
     }
@@ -74,7 +71,6 @@ export default function TaskAdd() {
           ))}
         </select>
       </div>
-      {/* {!MemberSelected && (<p className="home-error-alert">*Please select a Member</p>)} */}
       <br />
       <br />
       <div className="task-add-btn">

@@ -13,7 +13,7 @@ const userReducer = (state = initialState, action) => {
       };
 
     case LOGOUT:
-      return { name: "" };
+      return initialState;
 
     default:
       return state;
