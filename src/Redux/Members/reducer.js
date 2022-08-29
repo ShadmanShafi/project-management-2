@@ -6,15 +6,10 @@ import {
   LOGOUT,
 } from "./actionTypes";
 
-const initialState =
-  // [
-  //   {id: 1, name: "Sinatraa",},
-  //   {id: 2, name: "TenZ",},
-  // ];
-  {
-    members: [],
-    member: {},
-  };
+const initialState = {
+  members: [],
+  member: {},
+};
 
 //helper functions
 const nextMemberId = (members) => {
@@ -38,8 +33,8 @@ const membersReducer = (state = initialState, action) => {
     case MEMBER_GET:
       return {
         ...state,
-        member: {id: action.payload.id, name: action.payload.name,}
-      }
+        member: { id: action.payload.id, name: action.payload.name },
+      };
 
     case MEMBER_UPDATE:
       const { id, name } = action.payload;
@@ -52,7 +47,7 @@ const membersReducer = (state = initialState, action) => {
       };
 
     case MEMBER_DELETE:
-      const arr = state.members.filter(item => item.id != action.payload);
+      const arr = state.members.filter((item) => item.id != action.payload);
       return {
         ...state,
         members: arr,
