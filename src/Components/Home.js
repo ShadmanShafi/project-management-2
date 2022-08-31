@@ -1,32 +1,33 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { userAdd } from "../Redux/User/actions";
+// import { useDispatch } from "react-redux";
+// import { useNavigate } from "react-router-dom";
+import FormikContainer from "../Formik/FormikContainer";
+// import { userAdd } from "../Redux/User/actions";
 
 export default function Home() {
-  const [form, setForm] = useState({ name: "" });
-  const [errors, setErrors] = useState([]);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  // const [form, setForm] = useState({ name: "" });
+  // const [errors, setErrors] = useState([]);
+  // const dispatch = useDispatch();
+  // const navigate = useNavigate();
 
-  const onChangeInput = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
+  // const onChangeInput = (e) => {
+  //   setForm({ ...form, [e.target.name]: e.target.value });
+  // };
 
-  const validate = () => {
-    if (!(form.name.trim().length > 0)) {
-      setErrors([{ msg: "*Name cannot be empty" }]);
-      return false;
-    }
-    return true;
-  };
+  // const validate = () => {
+  //   if (!(form.name.trim().length > 0)) {
+  //     setErrors([{ msg: "*Name cannot be empty" }]);
+  //     return false;
+  //   }
+  //   return true;
+  // };
 
-  const onClickSubmit = () => {
-    if (validate()) {
-      dispatch(userAdd(form.name));
-      navigate("/dashboard");
-    }
-  };
+  // const onClickSubmit = () => {
+  //   if (validate()) {
+  //     dispatch(userAdd(form.name));
+  //     navigate("/dashboard");
+  //   }
+  // };
 
   return (
     <div className="home">
@@ -36,7 +37,8 @@ export default function Home() {
         alt="logo"
       />
       <h2 className="home-title">Task management</h2>
-      <input
+      <FormikContainer />
+      {/* <input
         className="home-input"
         type="text"
         placeholder="Enter name"
@@ -49,7 +51,7 @@ export default function Home() {
       ))}
       <button className="home-btn" onClick={onClickSubmit}>
         Submit
-      </button>
+      </button> */}
     </div>
   );
 }
