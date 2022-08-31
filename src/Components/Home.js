@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { userAdd } from "../Redux/User/actions";
@@ -45,8 +45,13 @@ export default function Home() {
                   control="input"
                   type="text"
                   name="name"
+                  placeholder="Enter username"
                 />
-                <button className="home-btn" type="submit">
+                <button
+                  className="home-btn"
+                  type="submit"
+                  disabled={!formik.isValid}
+                >
                   Submit
                 </button>
               </div>

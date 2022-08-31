@@ -353,6 +353,23 @@
   background-color: grey;
 }
 
+.member-input {
+  min-width: 95vw;
+  height: 75px;
+  padding: 30px;
+  font-size: 24px;
+  font-weight: 100;
+  color: rgb(20,124,160);
+  border: 1px solid rgb(33, 146, 183);
+  border-radius: 6px;
+}
+
+.member-add-btn {
+  margin: 2vw 0 0 0;
+  display: flex;
+  justify-content: flex-end;
+}
+
 .modal-delete {
   background-color: #147d94;
   min-height: 85vh;

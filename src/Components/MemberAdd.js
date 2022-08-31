@@ -1,57 +1,65 @@
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { useState } from "react";
 import { memberAdd } from "../Redux/Members/actions";
-import FormikContainer from "../Formik/FormikContainer";
+import { Formik, Form } from "formik";
+import * as Yup from "yup";
+import FormikControl from "../Formik/FormikControl";
 
 export default function MemberAdd() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const [form, setForm] = useState({
+  const initialValues = {
     member: "",
+  };
+
+  const validationSchema = Yup.object({
+    member: Yup.string().required("Required"),
   });
 
-  const onChangeFormValue = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+  const onSubmit = (values) => {
+    dispatch(memberAdd(values.member));
+    navigate(-1);
   };
-
-  const formIsValid = form.member.trim().length > 0;
-
-  const handleSubmitClick = () => {
-    if (formIsValid) {
-      navigate(-1);
-      dispatch(memberAdd(form.member))
-    }
-  };
-
-  const handleCancelClick = () => navigate(-1);
 
   return (
     <div className="task-add">
       <p className="dashboard-bold-text">Add member</p>
       <br />
       <br />
-      <FormikContainer control='member-add' name='member' />
-      {/* <textarea
-        className="task-add-name"
-        placeholder="Enter Member Name"
-        value={form.member}
-        name="member"
-        onChange={onChangeFormValue}
-      ></textarea> */}
-      <br />
-      {!formIsValid && (
-        <p className="home-error-alert">*Member Name is required</p>
-      )}
-      <br />
-      <br />
-
-      <br />
-      <div className="task-add-btn">
-        <button className="tasks-button" onClick={handleCancelClick}>Cancel</button>
-        <button className="tasks-button" onClick={handleSubmitClick}>Submit</button>
-      </div>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={onSubmit}
+      >
+        {(formik) => {
+          return (
+            <Form>
+              <div className="">
+                <FormikControl
+                  className="member-input"
+                  control="input"
+                  type="text"
+                  name="member"
+                  placeholder="Name of member"
+                />
+              </div>
+              <div className="member-add-btn">
+                <button
+                  className="tasks-button"
+                  type="button"
+                  onClick={() => navigate(-1)}
+                >
+                  Cancel
+                </button>
+                <button className="tasks-button" type="submit">
+                  Submit
+                </button>
+              </div>
+            </Form>
+          );
+        }}
+      </Formik>
     </div>
-  )
+  );
 }
