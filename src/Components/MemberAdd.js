@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { memberAdd } from "../Redux/Members/actions";
+import FormikContainer from "../Formik/FormikContainer";
 
 export default function MemberAdd() {
   const navigate = useNavigate();
@@ -31,13 +32,14 @@ export default function MemberAdd() {
       <p className="dashboard-bold-text">Add member</p>
       <br />
       <br />
-      <textarea
+      <FormikContainer control='member-add' name='member' />
+      {/* <textarea
         className="task-add-name"
         placeholder="Enter Member Name"
         value={form.member}
         name="member"
         onChange={onChangeFormValue}
-      ></textarea>
+      ></textarea> */}
       <br />
       {!formIsValid && (
         <p className="home-error-alert">*Member Name is required</p>
