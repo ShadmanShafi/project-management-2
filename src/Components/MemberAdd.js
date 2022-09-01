@@ -35,7 +35,7 @@ export default function MemberAdd() {
         {(formik) => {
           return (
             <Form>
-              <div className="">
+              <div>
                 <FormikControl
                   className="member-input"
                   control="input"

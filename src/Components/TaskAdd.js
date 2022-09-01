@@ -1,59 +1,99 @@
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { useState } from "react";
 import { taskAdd } from "../Redux/Tasks/actions";
+import { Formik, Form } from "formik";
+import * as Yup from "yup";
+import FormikControl from "../Formik/FormikControl";
 
 export default function TaskAdd() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const memberList = useSelector((state) => state.members.members);
-  const [form, setForm] = useState({
+
+  const dropdownOptions = memberList.filter((member, key) => {
+    const obj = {
+      key,
+      value: member.name,
+    };
+    return obj;
+  });
+  console.log(dropdownOptions);
+
+  const initialValues = {
     title: "",
     description: "",
     member: "",
+  };
+
+  const validationSchema = Yup.object({
+    title: Yup.string().required("Required"),
   });
 
-  const onChangeFormValue = (e) => {
-    console.log(e.target.value)
-    setForm({ ...form, [e.target.name]: e.target.value });
+  const onSubmit = (values) => {
+    dispatch(taskAdd(values.title, values.description, values.member));
+    navigate(-1);
   };
-
-  const formIsValid = form.title.trim().length > 0;
-
-  const handleSubmitClick = () => {
-    if (formIsValid) {
-      navigate(-1);
-      dispatch(taskAdd(form.title, form.description, form.member));
-    }
-  };
-
-  const handleCancelClick = () => navigate(-1);
 
   return (
     <div className="task-add">
       <p className="dashboard-bold-text">Add task</p>
       <br />
       <br />
-      <textarea
-        className="task-add-name"
-        placeholder="Enter Task Name"
-        value={form.title}
-        name="title"
-        onChange={onChangeFormValue}
-      ></textarea>
-      {!formIsValid && (<p className="home-error-alert">*Task Name is required</p>)}
-      <br />
-      <br />
-      <textarea
-        className="task-add-detail"
-        placeholder="Enter Task Description"
-        value={form.description}
-        name="description"
-        onChange={onChangeFormValue}
-      ></textarea>
-      <br />
-      <br />
-      <br />
+
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={onSubmit}
+      >
+        {(formik) => {
+          return (
+            <Form>
+              <div>
+                <FormikControl
+                  className="member-input"
+                  control="input"
+                  type="text"
+                  name="title"
+                  placeholder="Enter task title"
+                />
+                <br />
+                <br />
+                <FormikControl
+                  className="task-description-input"
+                  control="textarea"
+                  type="text"
+                  name="description"
+                  placeholder="Enter description"
+                />
+              </div>
+              <br />
+              <div className="task-add-row">
+                <p className="dashboard-bold-text">Assigned to: </p>
+                <FormikControl
+                  // className="member-input"
+                  control="select"
+                  type="text"
+                  name="member"
+                  options={dropdownOptions}
+                />
+              </div>
+              <div className="member-add-btn">
+                <button
+                  className="tasks-button"
+                  type="button"
+                  onClick={() => navigate(-1)}
+                >
+                  Cancel
+                </button>
+                <button className="tasks-button" type="submit">
+                  Submit
+                </button>
+              </div>
+            </Form>
+          );
+        }}
+      </Formik>
+{/*
       <div className="task-add-row">
         <p className="dashboard-bold-text">Assigned to: </p>
         <select className="dropdown" name="member" value={form.member} onChange={onChangeFormValue}>
@@ -70,17 +110,7 @@ export default function TaskAdd() {
             </option>
           ))}
         </select>
-      </div>
-      <br />
-      <br />
-      <div className="task-add-btn">
-        <button className="tasks-button" onClick={handleCancelClick}>
-          Cancel
-        </button>
-        <button className="tasks-button" onClick={handleSubmitClick}>
-          Submit
-        </button>
-      </div>
+      </div>*/}
     </div>
   );
 }
