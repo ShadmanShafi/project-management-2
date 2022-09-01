@@ -12,12 +12,11 @@ export default function TaskAdd() {
 
   const dropdownOptions = memberList.filter((member, key) => {
     const obj = {
-      key,
-      value: member.name,
+      key: {key},
+      value: {member},
     };
     return obj;
   });
-  console.log(dropdownOptions);
 
   const initialValues = {
     title: "",
@@ -70,7 +69,6 @@ export default function TaskAdd() {
               <div className="task-add-row">
                 <p className="dashboard-bold-text">Assigned to: </p>
                 <FormikControl
-                  // className="member-input"
                   control="select"
                   type="text"
                   name="member"
@@ -93,24 +91,6 @@ export default function TaskAdd() {
           );
         }}
       </Formik>
-{/*
-      <div className="task-add-row">
-        <p className="dashboard-bold-text">Assigned to: </p>
-        <select className="dropdown" name="member" value={form.member} onChange={onChangeFormValue}>
-          <option selected hidden>
-            Please Select a value
-          </option>
-          {memberList.map((item, key) => (
-            <option className="dropdown"
-              key={key}
-              value={item.name}
-              name="member"
-            >
-              {item.name}
-            </option>
-          ))}
-        </select>
-      </div>*/}
     </div>
   );
 }

@@ -5,10 +5,11 @@ export default function Select(props) {
   return (
     <div>
       <Field as="select" id={name} name={name} {...rest}>
-        {options.map((option) => {
+        {options.map((opt) => {
+          console.log(opt);
           return (
-            <option key={option.value} value={option.value}>
-              {option.key}
+            <option key={opt.id} value={opt.name}>
+              {opt.name}
             </option>
           );
         })}
