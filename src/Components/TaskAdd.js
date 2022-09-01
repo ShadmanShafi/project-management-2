@@ -12,8 +12,8 @@ export default function TaskAdd() {
 
   const dropdownOptions = memberList.filter((member, key) => {
     const obj = {
-      key: {key},
-      value: {member},
+      key: { key },
+      value: { member },
     };
     return obj;
   });
@@ -69,6 +69,7 @@ export default function TaskAdd() {
               <div className="task-add-row">
                 <p className="dashboard-bold-text">Assigned to: </p>
                 <FormikControl
+                  className="dropdown"
                   control="select"
                   type="text"
                   name="member"

@@ -21,7 +21,7 @@ const nextTaskId = (tasks) => {
 const tasksReducer = (state = initialState, action) => {
   switch (action.type) {
     case TASK_ADD:
-      console.log("Task Add");
+      // console.log("Task Add");
       const { title, description, member } = action.payload;
       const array = [...state.tasks];
       array.push({ id: nextTaskId(state.tasks), title, description, member });
