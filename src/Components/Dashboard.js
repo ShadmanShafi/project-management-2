@@ -1,15 +1,7 @@
-import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import fetchMembers from "../Redux/Members/thunk/fetchMembers";
 
 export default function Dashboard() {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchMembers);
-  }, [fetchMembers]);
 
   const handleButtonClick = (navigateTo) => {
     navigate(navigateTo);

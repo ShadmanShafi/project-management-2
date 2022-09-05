@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { memberAdd } from "../Redux/Members/actions";
+import addMember from "../Redux/Members/thunk/addMember";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import FormikControl from "../Formik/FormikControl";
@@ -8,6 +9,7 @@ import FormikControl from "../Formik/FormikControl";
 export default function MemberAdd() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const memberList = useSelector((state) => state.members.members);
 
   const initialValues = {
     member: "",
@@ -18,8 +20,9 @@ export default function MemberAdd() {
   });
 
   const onSubmit = (values) => {
-    dispatch(memberAdd(values.member));
-    navigate(-1);
+    dispatch(addMember(values.member, memberList));
+    //Check if success or failure, then re-direct.
+    navigate(-1); 
   };
 
   return (

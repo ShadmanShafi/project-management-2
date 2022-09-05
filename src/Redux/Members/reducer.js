@@ -13,7 +13,7 @@ const initialState = {
 };
 
 //helper functions
-const nextMemberId = (members) => {
+export const nextMemberId = (members) => {
   const maxId = members.reduce(
     (maxId, member) => Math.max(member.id, maxId),
     -1
@@ -24,8 +24,11 @@ const nextMemberId = (members) => {
 const membersReducer = (state = initialState, action) => {
   switch (action.type) {
     case MEMBER_LOADED:
-      return {...state, members: action.payload};
-    
+      return {
+        ...state,
+        members: action.payload,
+      };
+
     case MEMBER_ADD:
       const array = [...state.members];
       array.push({ id: nextMemberId(state.members), name: action.payload });
