@@ -2,7 +2,8 @@ import { useState, useEffect, useMemo } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import DeleteTask from "../Modals/DeleteTask";
-import { memberUpdate } from "../Redux/Members/actions";
+// import { memberUpdate } from "../Redux/Members/actions";
+import updateMember from "../Redux/Members/thunk/updateMember";
 import { taskGet, taskMemberUpdate } from "../Redux/Tasks/actions";
 
 export default function MemberDetail() {
@@ -50,7 +51,7 @@ export default function MemberDetail() {
 
   const handleUpdateMemberClick = (id, oldMemberName, newMemberName) => {
     navigate(-1);
-    dispatch(memberUpdate(id, newMemberName));
+    dispatch(updateMember(id, newMemberName));
     dispatch(taskMemberUpdate(oldMemberName, newMemberName));
   };
 
