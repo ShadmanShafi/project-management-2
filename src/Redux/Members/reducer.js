@@ -1,4 +1,5 @@
 import {
+  MEMBER_LOADED,
   MEMBER_ADD,
   MEMBER_GET,
   MEMBER_UPDATE,
@@ -22,6 +23,9 @@ const nextMemberId = (members) => {
 
 const membersReducer = (state = initialState, action) => {
   switch (action.type) {
+    case MEMBER_LOADED:
+      return {...state, members: action.payload};
+    
     case MEMBER_ADD:
       const array = [...state.members];
       array.push({ id: nextMemberId(state.members), name: action.payload });

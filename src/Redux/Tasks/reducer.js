@@ -1,4 +1,6 @@
 import {
+  LOADING,
+  TASK_GET_ALL,
   TASK_ADD,
   TASK_GET,
   TASK_UPDATE,
@@ -8,6 +10,7 @@ import {
 } from "./actionTypes";
 
 const initialState = {
+  loader: false,
   tasks: [],
   task: {},
 };
@@ -20,8 +23,20 @@ const nextTaskId = (tasks) => {
 
 const tasksReducer = (state = initialState, action) => {
   switch (action.type) {
+    case LOADING:
+      return {
+        ...state,
+        loader: action.payload,
+      };
+
+    case TASK_GET_ALL:
+      return {
+        ...state,
+        loader: false,
+        tasks: action.payload,
+      };
+
     case TASK_ADD:
-      // console.log("Task Add");
       const { title, description, member } = action.payload;
       const array = [...state.tasks];
       array.push({ id: nextTaskId(state.tasks), title, description, member });
@@ -55,15 +70,15 @@ const tasksReducer = (state = initialState, action) => {
     case TASK_MEMBER_UPDATE:
       const { oldMemberName, newMemberName } = action.payload;
       const arr = [...state.tasks];
-      arr.map(task => {
+      arr.map((task) => {
         if (task.member !== oldMemberName) {
           return task;
         }
         return {
           ...task,
           member: newMemberName,
-        }
-      })
+        };
+      });
       return {
         ...state,
         tasks: arr,
@@ -74,7 +89,7 @@ const tasksReducer = (state = initialState, action) => {
       return {
         ...state,
         tasks: arra,
-      }
+      };
 
     case LOGOUT:
       return initialState;

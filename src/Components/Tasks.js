@@ -1,14 +1,15 @@
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { taskGet } from "../Redux/Tasks/actions";
+import { taskGet, updateLoader, getTasks } from "../Redux/Tasks/actions";
 import { memberGet } from "../Redux/Members/actions";
+import { useEffect } from "react";
 
 export default function Tasks() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const memberList = useSelector((state) => state.members.members);
   const taskList = useSelector((state) => state.tasks.tasks);
-
+  
   const handleTaskAddClick = () => {
     navigate("/task-add");
   };
@@ -49,7 +50,7 @@ export default function Tasks() {
       {taskList.length > 0 ? (
         <ol type="1" className="tasks-list">
           {taskList.map((item, index) => (
-            <li className="tasks-list-item" key={item.id}>
+            <li className="tasks-list-item" key={index}>
               <div className="task-item-left">
                 <p className="tasks-list-item-children no-underline">
                   {index + 1}.

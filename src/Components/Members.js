@@ -1,12 +1,21 @@
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import fetchMembers from "../Redux/Members/thunk/fetchMembers";
 import { memberGet } from "../Redux/Members/actions"; 
+import { useEffect } from "react";
+
 
 export default function Members() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const memberList = useSelector((state) => state.members.members);
   const taskList = useSelector((state) => state.tasks.tasks);
+  const memberList = useSelector((state) => state.members.members);
+  console.log(memberList)
+  
+  // useEffect(() => {
+  //   dispatch(fetchMembers)
+  // }, [fetchMembers])
+  
 
   const handleMemberAddClick = () => {
     navigate("/member-add");
@@ -36,7 +45,8 @@ export default function Members() {
       <br />
       <br />
       <br />
-      {memberList.length > 0 ? (
+      {memberList.length > 0 ? 
+      (
         <ol type="1" className="tasks-list">
           {memberList.map((item, index) => (
             <li className="tasks-list-item" key={item.id}>
@@ -57,9 +67,11 @@ export default function Members() {
             </li>
           ))}
         </ol>
-      ) : (
+      ) 
+      : (
         <h4 className="tasks-text">There are no members available.</h4>
-      )}
+      )
+      }
     </div>
   );
 }

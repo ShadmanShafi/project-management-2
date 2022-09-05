@@ -1,5 +1,7 @@
 export const TASK_ADD = "tasks/add";
 export const TASK_GET = "tasks/get"
+export const TASK_GET_ALL = "tasks/getAll"
+export const LOADING = "tasks/loading";
 export const TASK_UPDATE = "tasks/update";
 export const TASK_MEMBER_UPDATE = "tasks/memberUpdate";
 export const TASK_DELETE = "tasks/delete";
