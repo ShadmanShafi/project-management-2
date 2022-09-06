@@ -8,8 +8,12 @@ const addMember = (memberName, membersList) => {
   const id = nextMemberId(membersList).toString();
 
   return async () => {
-    const members = doc(firebaseDb, COLLECTION_NAME, id);
-    await setDoc(members, { id: id, name: memberName });
+    try {
+      const members = doc(firebaseDb, COLLECTION_NAME, id);
+      await setDoc(members, { id: id, name: memberName });
+    } catch (error) {
+      console.log(error);
+    }
   };
 };
 

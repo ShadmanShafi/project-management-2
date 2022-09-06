@@ -7,7 +7,11 @@ const deleteMember = (memberName) => {
   const id = memberName.toString();
 
   return async () => {
-    await deleteDoc(doc(firebaseDb, COLLECTION_NAME, id));
+    try {
+      await deleteDoc(doc(firebaseDb, COLLECTION_NAME, id));
+    } catch (error) {
+      console.log(error);
+    }
   };
 };
 

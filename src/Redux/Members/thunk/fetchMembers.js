@@ -5,11 +5,15 @@ import { collection, getDocs } from "firebase/firestore/lite";
 const COLLECTION_NAME = "members";
 
 const fetchMembers = async (dispatch) => {
-  const members = collection(firebaseDb, COLLECTION_NAME);
-  const snapshot = await getDocs(members);
-  const response = snapshot.docs.map((doc) => doc.data());
+  try {
+    const members = collection(firebaseDb, COLLECTION_NAME);
+    const snapshot = await getDocs(members);
+    const response = snapshot.docs.map((doc) => doc.data());
 
-  dispatch(memberLoaded(response));
+    dispatch(memberLoaded(response));
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export default fetchMembers;
