@@ -2,9 +2,8 @@ import { useState, useEffect, useMemo } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import DeleteTask from "../Modals/DeleteTask";
-// import { memberUpdate } from "../Redux/Members/actions";
 import updateMember from "../Redux/Members/thunk/updateMember";
-import { taskGet, taskMemberUpdate } from "../Redux/Tasks/actions";
+import { taskGet } from "../Redux/Tasks/actions";
 import updateTaskMember from "../Redux/Tasks/thunk/updateTaskMember";
 
 export default function MemberDetail() {

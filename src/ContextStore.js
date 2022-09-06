@@ -1,4 +1,4 @@
-//Not Needed. used Firebase Firestore and Redux
+//Not Needed. Used Firebase Firestore and Redux-thunk with Redux-persist.
 import { useState, useEffect, createContext, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { v4 } from "uuid";

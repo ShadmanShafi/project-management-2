@@ -1,8 +1,7 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import DeleteTask from "../Modals/DeleteTask";
-import { taskUpdate } from "../Redux/Tasks/actions";
 import updateTask from "../Redux/Tasks/thunk/updateTask";
 
 export default function TaskDetail() {
