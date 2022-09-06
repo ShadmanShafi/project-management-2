@@ -1,10 +1,10 @@
 import {
   MEMBER_LOADED,
   MEMBER_GET,
+  LOGOUT,
   // MEMBER_ADD,
   // MEMBER_UPDATE,
   // MEMBER_DELETE,
-  LOGOUT,
 } from "./actionTypes";
 
 export const memberLoaded = (members) => {

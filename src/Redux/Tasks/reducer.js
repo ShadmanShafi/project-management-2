@@ -1,11 +1,11 @@
 import {
   TASK_LOADED,
   TASK_GET,
+  TASK_LOGOUT,
   // TASK_ADD,
   // TASK_UPDATE,
   // TASK_MEMBER_UPDATE,
   // TASK_DELETE,
-  LOGOUT,
 } from "./actionTypes";
 
 const initialState = {
@@ -83,7 +83,7 @@ const tasksReducer = (state = initialState, action) => {
     //     tasks: arra,
     //   };
 
-    case LOGOUT:
+    case TASK_LOGOUT:
       return initialState;
 
     default:

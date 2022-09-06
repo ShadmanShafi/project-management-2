@@ -1,12 +1,15 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import deleteMember from "../Redux/Members/thunk/deleteMember";
+import deleteTask from "../Redux/Tasks/thunk/deleteTask";
 import { logout } from "../Redux/User/actions";
-import clearMembers from "../Redux/Members/thunk/clearMembers";
+import { memberLogout } from "../Redux/Members/actions";
 import { taskLogout } from "../Redux/Tasks/actions";
 
 export default function Header() {
   const name = useSelector((state) => state.user.name);
-  const membersList = useSelector((state) => state.members)
+  const membersList = useSelector((state) => state.members.members);
+  const tasksList = useSelector((state) => state.tasks.tasks);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -16,8 +19,10 @@ export default function Header() {
 
   const handleLogoutClick = () => {
     dispatch(logout());
-    dispatch(clearMembers(membersList));
+    dispatch(memberLogout());
     dispatch(taskLogout());
+    membersList.map((member) => dispatch(deleteMember(member.id)));
+    tasksList.map((task) => dispatch(deleteTask(task.id)));
     navigate("/");
   };
 

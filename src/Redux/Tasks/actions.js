@@ -1,11 +1,11 @@
 import {
   TASK_LOADED,
   TASK_GET,
+  TASK_LOGOUT,
   // TASK_ADD,
   // TASK_UPDATE,
   // TASK_MEMBER_UPDATE,
   // TASK_DELETE,
-  LOGOUT,
 } from "./actionTypes";
 
 export const taskLoaded = (tasks) => {
@@ -70,6 +70,6 @@ export const taskGet = (id, title, description, member) => {
 
 export const taskLogout = () => {
   return {
-    type: LOGOUT,
+    type: TASK_LOGOUT,
   };
 };
