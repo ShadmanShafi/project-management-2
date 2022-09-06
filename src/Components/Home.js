@@ -5,6 +5,7 @@ import { userAdd } from "../Redux/User/actions";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import FormikControl from "../Formik/FormikControl";
+import addUser from "../Redux/User/thunk/addUser";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -20,6 +21,7 @@ export default function Home() {
 
   const onSubmit = (values) => {
     dispatch(userAdd(values.name));
+    dispatch(addUser(values.name));
     navigate("/dashboard");
   };
 

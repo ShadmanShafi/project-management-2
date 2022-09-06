@@ -5,6 +5,7 @@ import DeleteTask from "../Modals/DeleteTask";
 // import { memberUpdate } from "../Redux/Members/actions";
 import updateMember from "../Redux/Members/thunk/updateMember";
 import { taskGet, taskMemberUpdate } from "../Redux/Tasks/actions";
+import updateTaskMember from "../Redux/Tasks/thunk/updateTaskMember";
 
 export default function MemberDetail() {
   const navigate = useNavigate();
@@ -50,9 +51,9 @@ export default function MemberDetail() {
   };
 
   const handleUpdateMemberClick = (id, oldMemberName, newMemberName) => {
-    navigate(-1);
     dispatch(updateMember(id, newMemberName));
-    dispatch(taskMemberUpdate(oldMemberName, newMemberName));
+    // dispatch(updateTaskMember(oldMemberName, newMemberName, taskList));
+    navigate(-1);
   };
 
   return (

@@ -2,8 +2,10 @@ import React from "react";
 import ReactModal from "react-modal";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { memberDelete } from "../Redux/Members/actions";
-import { taskDelete } from "../Redux/Tasks/actions";
+// import { memberDelete } from "../Redux/Members/actions";
+import deleteMember from "../Redux/Members/thunk/deleteMember";
+// import { taskDelete } from "../Redux/Tasks/actions";
+import deleteTask from "../Redux/Tasks/thunk/deleteTask";
 
 export default function DeleteTask({ itemToDelete, id, hideModal, showModal }) {
   const navigate = useNavigate();
@@ -12,10 +14,9 @@ export default function DeleteTask({ itemToDelete, id, hideModal, showModal }) {
   const handleDeleteClick = (itemToDelete, id) => {
     navigate(-1);
     if (itemToDelete === "member") {
-      // console.log(id);
-      dispatch(memberDelete(id));
+      dispatch(deleteMember(id));
     } else if (itemToDelete === "task") {
-      dispatch(taskDelete(id));
+      dispatch(deleteTask(id));
     }
   };
 

@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import DeleteTask from "../Modals/DeleteTask";
 import { taskUpdate } from "../Redux/Tasks/actions";
+import updateTask from "../Redux/Tasks/thunk/updateTask";
 
 export default function TaskDetail() {
   const navigate = useNavigate();
@@ -46,7 +47,7 @@ export default function TaskDetail() {
 
   const handleUpdateTaskClick = (id, title, description, member) => {
     navigate(-1);
-    dispatch(taskUpdate(id, title, description, member));
+    dispatch(updateTask(id, title, description, member));
   };
 
   return (

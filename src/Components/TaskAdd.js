@@ -1,14 +1,16 @@
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { taskAdd } from "../Redux/Tasks/actions";
+// import { taskAdd } from "../Redux/Tasks/actions";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import FormikControl from "../Formik/FormikControl";
+import addTask from "../Redux/Tasks/thunk/addTask";
 
 export default function TaskAdd() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const memberList = useSelector((state) => state.members.members);
+  const taskList = useSelector((state) => state.tasks.tasks);
 
   const dropdownOptions = memberList.filter((member, key) => {
     const obj = {
@@ -29,7 +31,9 @@ export default function TaskAdd() {
   });
 
   const onSubmit = (values) => {
-    dispatch(taskAdd(values.title, values.description, values.member));
+    dispatch(
+      addTask(values.title, values.description, values.member, taskList)
+    );
     navigate(-1);
   };
 

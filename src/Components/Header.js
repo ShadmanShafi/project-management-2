@@ -1,11 +1,13 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../Redux/User/actions";
-import { memberLogout } from "../Redux/Members/actions";
+// import { memberLogout } from "../Redux/Members/actions";
+import clearMembers from "../Redux/Members/thunk/clearMembers";
 import { taskLogout } from "../Redux/Tasks/actions";
 
 export default function Header() {
   const name = useSelector((state) => state.user.name);
+  const membersList = useSelector((state) => state.members)
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -15,7 +17,7 @@ export default function Header() {
 
   const handleLogoutClick = () => {
     dispatch(logout());
-    dispatch(memberLogout());
+    dispatch(clearMembers(membersList));
     dispatch(taskLogout());
     navigate("/");
   };

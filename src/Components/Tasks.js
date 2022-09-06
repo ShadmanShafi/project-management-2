@@ -1,15 +1,22 @@
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { taskGet, updateLoader, getTasks } from "../Redux/Tasks/actions";
+import { taskGet } from "../Redux/Tasks/actions";
 import { memberGet } from "../Redux/Members/actions";
 import { useEffect } from "react";
+import fetchTasks from "../Redux/Tasks/thunk/fetchTasks";
 
 export default function Tasks() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const memberList = useSelector((state) => state.members.members);
   const taskList = useSelector((state) => state.tasks.tasks);
-  
+
+  useEffect(() => {
+    setTimeout(() => {
+      dispatch(fetchTasks);
+    }, 500);
+  }, [dispatch]);
+
   const handleTaskAddClick = () => {
     navigate("/task-add");
   };

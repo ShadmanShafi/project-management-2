@@ -1,3 +1,4 @@
+//Not Needed. used Firebase Firestore and Redux
 import { useState, useEffect, createContext, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { v4 } from "uuid";

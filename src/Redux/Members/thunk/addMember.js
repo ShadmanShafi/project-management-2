@@ -1,5 +1,5 @@
 import firebaseDb from "../../../util/firebase";
-import {  doc, setDoc } from "firebase/firestore/lite";
+import { doc, setDoc } from "firebase/firestore/lite";
 import { nextMemberId } from "../reducer";
 
 const COLLECTION_NAME = "members";
