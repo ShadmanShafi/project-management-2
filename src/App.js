@@ -1,16 +1,26 @@
 import "./App.css";
 import Routes from "./Routes";
-import { MyProvider } from "./ContextStore";
+import { Provider } from "react-redux";
+import store, { persistor } from "./Redux/store";
 import Layout from "./Layout";
+import { PersistGate } from "redux-persist/integration/react";
+import { ErrorBoundary } from "./Components/ErrorBoundary";
+import { BrowserRouter } from "react-router-dom";
 
 function App() {
   return (
     <div className="App">
-      <MyProvider>
-        <Layout>
-          <Routes />
-        </Layout>
-      </MyProvider>
+      <BrowserRouter>
+        <Provider store={store}>
+          <PersistGate persistor={persistor}>
+            <Layout>
+              <ErrorBoundary>
+                <Routes />
+              </ErrorBoundary>
+            </Layout>
+          </PersistGate>
+        </Provider>
+      </BrowserRouter>
     </div>
   );
 }

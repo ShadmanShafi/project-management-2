@@ -9,7 +9,7 @@
 .home {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  min-height: 50vh;
   justify-content: flex-start;
   align-items: center;
 }
@@ -24,7 +24,7 @@
 }
 
 .home-input {
-  margin: 170px 0 0 0;
+  margin: 60px 0 0 0;
   width: 450px;
   height: 75px;
   padding: 30px;
@@ -35,7 +35,19 @@
   border-radius: 6px;
 }
 
-.home-input::placeholder {
+.home-input-password {
+  margin: 20px 0 0 0;
+  width: 450px;
+  height: 75px;
+  padding: 30px;
+  font-size: 24px;
+  font-weight: 100;
+  color: rgb(20,124,160);
+  border: 1px solid rgb(33, 146, 183);
+  border-radius: 6px;
+}
+
+.home-input::placeholder, .home-input-password::placeholder {
   font-weight: 100;
   opacity: 0.6;
 }
@@ -127,6 +139,17 @@
 
 .header-tab:hover {
   background-color: #09aacd;
+}
+
+.home-text-underline {
+  font-size: 20px;
+  font-weight: 400;
+  color: #005568;
+}
+
+.home-text-underline-span {
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .footer {
@@ -351,6 +374,34 @@
 .members {
   min-height: 85vh;
   background-color: grey;
+}
+
+.member-input {
+  min-width: 95vw;
+  height: 75px;
+  padding: 30px;
+  font-size: 24px;
+  font-weight: 100;
+  color: rgb(20,124,160);
+  border: 1px solid rgb(33, 146, 183);
+  border-radius: 6px;
+}
+
+.task-description-input {
+  min-width: 95vw;
+  min-height: 13vw;
+  padding: 30px;
+  font-size: 24px;
+  font-weight: 100;
+  color: rgb(20,124,160);
+  border: 1px solid rgb(33, 146, 183);
+  border-radius: 6px;
+}
+
+.member-add-btn {
+  margin: 2vw 0 0 0;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .modal-delete {

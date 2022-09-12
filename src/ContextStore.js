@@ -1,3 +1,4 @@
+//Not Needed. Used Firebase Firestore and Redux-thunk with Redux-persist.
 import { useState, useEffect, createContext, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { v4 } from "uuid";
@@ -55,7 +56,7 @@ export function MyProvider({ children }) {
 
   useEffect(() => {
     localStorage.setItem("taskManagementStore", JSON.stringify(state));
-    console.log(state);
+    // console.log(state);
   }, [state]);
 
   const setName = (newValue) => {
@@ -86,9 +87,9 @@ export function MyProvider({ children }) {
   };
 
   const deleteTask = (task) => {
-    console.log(task);
+    // console.log(task);
     const newList = state.taskList.filter((item) => item.uid !== task.uid);
-    console.log(newList);
+    // console.log(newList);
     updateState({ ...state, taskList: newList });
   };
 

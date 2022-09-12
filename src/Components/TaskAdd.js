@@ -1,86 +1,100 @@
 import { useNavigate } from "react-router-dom";
-import { useUserContext } from "../ContextStore";
-import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Formik, Form } from "formik";
+import * as Yup from "yup";
+import FormikControl from "../Formik/FormikControl";
+import addTask from "../Redux/Tasks/thunk/addTask";
 
 export default function TaskAdd() {
   const navigate = useNavigate();
-  const { memberList, setTaskList } = useUserContext();
-  const [form, setForm] = useState({
-    title: "",
-    details: "",
-    member: "",
+  const dispatch = useDispatch();
+  const memberList = useSelector((state) => state.members.members);
+  const taskList = useSelector((state) => state.tasks.tasks);
+
+  const dropdownOptions = memberList.filter((member, key) => {
+    const obj = {
+      key: { key },
+      value: { member },
+    };
+    return obj;
   });
 
-  const onChangeFormValue = (e) => {
-    console.log(e.target.value)
-    setForm({ ...form, [e.target.name]: e.target.value });
+  const initialValues = {
+    title: "",
+    description: "",
+    member: "",
   };
 
-  const formIsValid = form.title.trim().length > 0;
-  const MemberSelected = form.member.trim().length > 0;
+  const validationSchema = Yup.object({
+    title: Yup.string().required("Required"),
+  });
 
-  const handleSubmitClick = () => {
-    if (formIsValid && MemberSelected) {
-      setTaskList(form);
-      navigate(-1);
-    }
+  const onSubmit = (values) => {
+    dispatch(
+      addTask(values.title, values.description, values.member, taskList)
+    );
+    navigate(-1);
   };
-
-  const handleCancelClick = () => navigate(-1);
 
   return (
     <div className="task-add">
       <p className="dashboard-bold-text">Add task</p>
       <br />
       <br />
-      <textarea
-        className="task-add-name"
-        placeholder="Enter Task Name"
-        value={form.title}
-        name="title"
-        onChange={onChangeFormValue}
-      ></textarea>
-      {!formIsValid && (<p className="home-error-alert">*Task Name is required</p>)}
-      <br />
-      <br />
-      <textarea
-        className="task-add-detail"
-        placeholder="Enter Task Details"
-        value={form.details}
-        name="details"
-        onChange={onChangeFormValue}
-      ></textarea>
-      <br />
-      <br />
-      <br />
-      <div className="task-add-row">
-        <p className="dashboard-bold-text">Assigned to: </p>
-        <select className="dropdown" name="member" value={form.member} onChange={onChangeFormValue}>
-          <option selected hidden>
-            Please Select a value
-          </option>
-          {memberList.map((item, key) => (
-            <option className="dropdown"
-              key={key}
-              value={item.member}
-              name="member"
-            >
-              {item.member}
-            </option>
-          ))}
-        </select>
-      </div>
-      {!MemberSelected && (<p className="home-error-alert">*Please select a Member</p>)}
-      <br />
-      <br />
-      <div className="task-add-btn">
-        <button className="tasks-button" onClick={handleCancelClick}>
-          Cancel
-        </button>
-        <button className="tasks-button" onClick={handleSubmitClick}>
-          Submit
-        </button>
-      </div>
+
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={onSubmit}
+      >
+        {(formik) => {
+          return (
+            <Form>
+              <div>
+                <FormikControl
+                  className="member-input"
+                  control="input"
+                  type="text"
+                  name="title"
+                  placeholder="Enter task title"
+                />
+                <br />
+                <br />
+                <FormikControl
+                  className="task-description-input"
+                  control="textarea"
+                  type="text"
+                  name="description"
+                  placeholder="Enter description"
+                />
+              </div>
+              <br />
+              <div className="task-add-row">
+                <p className="dashboard-bold-text">Assigned to: </p>
+                <FormikControl
+                  className="dropdown"
+                  control="select"
+                  type="text"
+                  name="member"
+                  options={dropdownOptions}
+                />
+              </div>
+              <div className="member-add-btn">
+                <button
+                  className="tasks-button"
+                  type="button"
+                  onClick={() => navigate(-1)}
+                >
+                  Cancel
+                </button>
+                <button className="tasks-button" type="submit">
+                  Submit
+                </button>
+              </div>
+            </Form>
+          );
+        }}
+      </Formik>
     </div>
   );
 }

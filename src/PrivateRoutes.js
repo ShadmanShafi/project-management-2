@@ -1,9 +1,9 @@
 import React from 'react'
-import {useUserContext} from "./ContextStore";
+import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom'
 
 export default function PrivateRoutes({children}) {
-  const {name} = useUserContext();
+  const name = useSelector((state) => state.user.email)
 
   return name ? children : <Navigate to="/" />;
 }

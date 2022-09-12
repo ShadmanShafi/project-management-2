@@ -1,10 +1,10 @@
 import React from "react";
-import { useUserContext } from "./ContextStore";
+import { useSelector } from "react-redux";
 import Header from "./Components/Header";
 import Footer from "./Components/Footer";
 
 export default function Layout(props) {
-  const {name} = useUserContext();
+  const name = useSelector((state) => state.user.email)
 
   return (
     <div>

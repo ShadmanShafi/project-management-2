@@ -1,32 +1,40 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useUserContext } from "../ContextStore";
+import { useSelector, useDispatch } from "react-redux";
 import DeleteTask from "../Modals/DeleteTask";
+import updateTask from "../Redux/Tasks/thunk/updateTask";
 
 export default function TaskDetail() {
   const navigate = useNavigate();
-  const { memberList, getTaskInfo, editTask, deleteTask } = useUserContext();
+  const dispatch = useDispatch();
+  const currentTask = useSelector((state) => state.tasks.task);
+  const memberList = useSelector((state) => state.members.members);
   const { id } = useParams();
   const [showModal, setShowModal] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
-  const currentTask = useMemo(() => getTaskInfo(id), [id]);
   const [form, setForm] = useState({
-    uid: "",
+    id: "",
     title: "",
-    details: "",
+    description: "",
     member: "",
   });
 
   useEffect(() => {
     if (currentTask) {
       setForm({
-        uid: currentTask.uid,
+        id: currentTask.id,
         title: currentTask.title,
-        details: currentTask.details,
+        description: currentTask.description,
         member: currentTask.member,
       });
     }
   }, currentTask);
+
+  const onChangeFormValue = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const formIsValid = form.title.trim().length > 0;
 
   const handleBackClick = () => {
     navigate(-1);
@@ -36,23 +44,17 @@ export default function TaskDetail() {
     setIsEditMode(true);
   };
 
-  const handleDeleteTaskClick = () => {
-    deleteTask(currentTask);
+  const handleUpdateTaskClick = (id, title, description, member) => {
     navigate(-1);
+    dispatch(updateTask(id, title, description, member));
   };
-
-  const onChangeFormValue = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
-
-  const formIsValid = form.title.trim().length > 0;
-  const MemberSelected = form.member.trim().length > 0;
 
   return (
     <div className="task-detail">
       {showModal && (
         <DeleteTask
-          handleDelete={handleDeleteTaskClick}
+          itemToDelete={"task"}
+          id={id}
           hideModal={() => {
             setShowModal(false);
           }}
@@ -69,7 +71,12 @@ export default function TaskDetail() {
               className="task-detail-right-btns"
               onClick={() => {
                 if (formIsValid) {
-                  editTask(form);
+                  handleUpdateTaskClick(
+                    id,
+                    form.title,
+                    form.description,
+                    form.member
+                  );
                   setIsEditMode(false);
                   setForm(form);
                 }
@@ -124,9 +131,9 @@ export default function TaskDetail() {
           <br />
           <textarea
             className="task-add-detail"
-            placeholder="Enter Task Details"
-            value={form.details}
-            name="details"
+            placeholder="Enter Task Description"
+            value={form.description}
+            name="description"
             onChange={onChangeFormValue}
           ></textarea>
           <br />
@@ -147,17 +154,14 @@ export default function TaskDetail() {
                 <option
                   className="dropdown"
                   key={key}
-                  value={item.member}
-                  name="member"
+                  value={item.name}
+                  name="name"
                 >
-                  {item.member}
+                  {item.name}
                 </option>
               ))}
             </select>
           </div>
-          {!MemberSelected && (
-            <p className="home-error-alert">*Please select a Member</p>
-          )}
         </div>
       )}
       {!isEditMode && (
@@ -166,7 +170,9 @@ export default function TaskDetail() {
           <br />
           <p className="tasks-bold-text">
             Task Details:{" "}
-            {currentTask.details ? currentTask.details : "Not Available"}
+            {currentTask.description
+              ? currentTask.description
+              : "Not Available"}
           </p>
           <br />
           <p className="tasks-bold-text">

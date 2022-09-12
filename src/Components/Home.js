@@ -1,30 +1,35 @@
-import React, { useState } from "react";
-import { useUserContext } from "../ContextStore";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+// import addUser from "../Redux/User/thunk/registerUser";
+// import { userAdd } from "../Redux/User/actions";
+import { Formik, Form } from "formik";
+import * as Yup from "yup";
+import FormikControl from "../Formik/FormikControl";
+import loginUser from "../Redux/User/thunk/loginUser";
 
 export default function Home() {
-  const [form, setForm] = useState({ name: "" });
-  const [errors, setErrors] = useState([]);
-  const { setName } = useUserContext();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const onChangeInput = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+  const initialValues = {
+    email: "",
+    password: "",
   };
 
-  const validate = () => {
-    if (!(form.name.trim().length > 0)) {
-      setErrors([{ msg: "*Name cannot be empty" }]);
-      return false;
-    }
-    return true;
+  const validationSchema = Yup.object({
+    email: Yup.string().email().required("*Name is required."),
+    password: Yup.string()
+      .required("*Password is required.")
+      .min(6, "*Password is too short."),
+  });
+
+  const onClickRegister = () => {
+    navigate("/register");
   };
 
-  const onClickSubmit = () => {
-    if (validate()) {
-      setName(form.name);
-      navigate("/dashboard");
-    }
+  const onSubmit = async (values) => {
+    await loginUser(dispatch, values.email, values.password);
+    navigate("/dashboard");
   };
 
   return (
@@ -35,20 +40,49 @@ export default function Home() {
         alt="logo"
       />
       <h2 className="home-title">Task management</h2>
-      <input
-        className="home-input"
-        type="text"
-        placeholder="Enter name"
-        name="name"
-        value={form.name}
-        onChange={onChangeInput}
-      />
-      {errors.map((error) => (
-        <div className="home-error-alert">{error.msg}</div>
-      ))}
-      <button className="home-btn" onClick={onClickSubmit}>
-        Submit
-      </button>
+      <br />
+      <h3 className="home-title">Login</h3>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={onSubmit}
+      >
+        {(formik) => {
+          return (
+            <Form>
+              <div className="home">
+                <FormikControl
+                  className="home-input"
+                  control="input"
+                  type="email"
+                  name="email"
+                  placeholder="Enter email"
+                />
+                <FormikControl
+                  className="home-input-password"
+                  control="input"
+                  type="password"
+                  name="password"
+                  placeholder="Enter password"
+                />
+                <button
+                  className="home-btn"
+                  type="submit"
+                  disabled={!formik.isValid}
+                >
+                  Submit
+                </button>
+              </div>
+            </Form>
+          );
+        }}
+      </Formik>
+      <h3 className="home-text-underline">
+        Don't have an account? Click her to{" "}
+        <span className="home-text-underline-span" onClick={onClickRegister}>
+          Sign Up!
+        </span>
+      </h3>
     </div>
   );
 }
