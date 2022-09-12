@@ -6,6 +6,7 @@ import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import FormikControl from "../Formik/FormikControl";
 import loginUser from "../Redux/User/thunk/loginUser";
+import { logout } from "../Redux/User/actions";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -32,6 +33,8 @@ export default function Home() {
     navigate("/dashboard");
   };
 
+  dispatch(logout());
+
   return (
     <div className="home">
       <img
@@ -39,9 +42,11 @@ export default function Home() {
         className="home-logo"
         alt="logo"
       />
-      <h2 className="home-title">Task management</h2>
+      <h2 className="home-title">Task Management</h2>
       <br />
-      <h3 className="home-title">Login</h3>
+      <br />
+      <h3 className="home-subtitle">Login to your existing account</h3>
+      <br />
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}

@@ -30,13 +30,13 @@ export default function Members() {
       <p className="tasks-bold-text">All Members</p>
       <br />
       <br />
-      <p className="tasks-text">You will find all members here.</p>
+      <p className="tasks-text">You'll find all the Members, listed below.</p>
       <br />
       <br />
       <br />
       <br />
       <div className="tasks-row">
-        <p className="tasks-bold-text">Here are all members:</p>
+        <p className="tasks-bold-text">Here is the list of all the Members:</p>
         <button className="tasks-button" onClick={handleMemberAddClick}>
           Add new
         </button>
@@ -67,7 +67,7 @@ export default function Members() {
           ))}
         </ol>
       ) : (
-        <h4 className="tasks-text">There are no members available.</h4>
+        <h4 className="tasks-text">No Members have been added yet.</h4>
       )}
     </div>
   );

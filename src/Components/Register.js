@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import registerUser from "../Redux/User/thunk/registerUser";
-import { userAdd } from "../Redux/User/actions";
+// import { userAdd } from "../Redux/User/actions";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import FormikControl from "../Formik/FormikControl";
@@ -17,7 +17,8 @@ export default function Register() {
   };
 
   const validationSchema = Yup.object({
-    email: Yup.string().email().required("*Name is required."),
+    name: Yup.string().required("*Name is required."),
+    email: Yup.string().email().required("*Email is required."),
     password: Yup.string()
       .required("*Password is required.")
       .min(6, "*Password is too short."),
@@ -32,8 +33,14 @@ export default function Register() {
   };
 
   const onSubmit = async (values) => {
-    await registerUser(dispatch, values.email, values.password, values.passwordConfirmation)
-    navigate("/dashboard");
+    await registerUser(
+      navigate,
+      dispatch,
+      values.name,
+      values.email,
+      values.password,
+      values.passwordConfirmation
+    );
   };
 
   return (
@@ -43,9 +50,11 @@ export default function Register() {
         className="home-logo"
         alt="logo"
       />
-      <h2 className="home-title">Task management</h2>
+      <h2 className="home-title">Task Management</h2>
       <br />
-      <h3 className="home-title">Register</h3>
+      <br />
+      <h3 className="home-subtitle">Register as a new member</h3>
+      <br />
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -58,9 +67,16 @@ export default function Register() {
                 <FormikControl
                   className="home-input"
                   control="input"
+                  type="text"
+                  name="name"
+                  placeholder="Enter username"
+                />
+                <FormikControl
+                  className="home-input"
+                  control="input"
                   type="email"
                   name="email"
-                  placeholder="Enter Email"
+                  placeholder="Enter email"
                 />
                 <FormikControl
                   className="home-input-password"
@@ -91,7 +107,7 @@ export default function Register() {
       <h3 className="home-text-underline">
         Already have an account? Click her to{" "}
         <span className="home-text-underline-span" onClick={onClickLogin}>
-          Login Up!
+          Login!
         </span>
       </h3>
     </div>

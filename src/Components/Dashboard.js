@@ -10,7 +10,7 @@ export default function Dashboard() {
   return (
     <div className="dashboard">
       <div>
-        <p className="dashboard-bold-text">Welcome to task management system</p>
+        <p className="dashboard-bold-text">Welcome to Task Management system</p>
         <br />
         <p className="dashboard-text">
           Lorem Ipsum is simply dummy text of the printing and typesetting

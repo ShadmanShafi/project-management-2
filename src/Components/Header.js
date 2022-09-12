@@ -7,7 +7,7 @@ import { memberLogout } from "../Redux/Members/actions";
 import { taskLogout } from "../Redux/Tasks/actions";
 
 export default function Header() {
-  const name = useSelector((state) => state.user.email);
+  const name = useSelector((state) => state.user.name);
   const membersList = useSelector((state) => state.members.members);
   const tasksList = useSelector((state) => state.tasks.tasks);
   const dispatch = useDispatch();
@@ -33,8 +33,9 @@ export default function Header() {
           src={process.env.PUBLIC_URL + "logo.png"}
           className="header-icon"
           alt="logo"
+          onClick={() => handleTabClick("/dashboard")}
         />
-        <h2 className="header-title">Task management</h2>
+        <h2 className="header-title" onClick={() => handleTabClick("/dashboard")}>Task Management</h2>
       </div>
       <div className="header-right">
         <div className="header-row">

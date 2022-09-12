@@ -40,13 +40,13 @@ export default function Tasks() {
       <p className="tasks-bold-text">All Tasks</p>
       <br />
       <br />
-      <p className="tasks-text">You will find all tasks here.</p>
+      <p className="tasks-text">You'll find all the Tasks, listed below.</p>
       <br />
       <br />
       <br />
       <br />
       <div className="tasks-row">
-        <p className="tasks-bold-text">Here are all tasks:</p>
+        <p className="tasks-bold-text">Here is the list of all the Tasks:</p>
         <button className="tasks-button" onClick={handleTaskAddClick}>
           Add new
         </button>
@@ -86,7 +86,7 @@ export default function Tasks() {
           ))}
         </ol>
       ) : (
-        <h4 className="tasks-text">There are no tasks available.</h4>
+        <h4 className="tasks-text">No Tasks have been added yet.</h4>
       )}
     </div>
   );

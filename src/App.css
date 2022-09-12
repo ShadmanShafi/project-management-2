@@ -9,7 +9,6 @@
 .home {
   display: flex;
   flex-direction: column;
-  min-height: 50vh;
   justify-content: flex-start;
   align-items: center;
 }
@@ -18,17 +17,25 @@
   margin: 130px 0 0 0;
   width: 70px;
 }
+
 .home-title {
   margin: 10px 0 0 0;
   color: rgb(20,124,160);
 }
 
+.home-subtitle {
+  margin: 10px 0 0 0;
+  color: rgb(48, 143, 175);
+  font-weight: 500;
+  text-decoration: underline;
+}
+
 .home-input {
-  margin: 60px 0 0 0;
+  margin: 30px 0 0 0;
   width: 450px;
-  height: 75px;
+  height: 40px;
   padding: 30px;
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 100;
   color: rgb(20,124,160);
   border: 1px solid rgb(33, 146, 183);
@@ -36,11 +43,11 @@
 }
 
 .home-input-password {
-  margin: 20px 0 0 0;
+  margin: 30px 0 0 0;
   width: 450px;
-  height: 75px;
+  height: 40px;
   padding: 30px;
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 100;
   color: rgb(20,124,160);
   border: 1px solid rgb(33, 146, 183);
@@ -59,7 +66,7 @@
 }
 
 .home-btn {
-  margin: 100px 0 0 0;
+  margin: 60px 0 0 0;
   width: 300px;
   height: 60px;
   color: rgb(242, 242, 242);
@@ -71,6 +78,18 @@
 
 .home-btn:hover {
   background-color: #09aacd;
+}
+
+.home-text-underline {
+  margin: 20px 0 20px 0;
+  font-size: 20px;
+  font-weight: 400;
+  color: #005568;
+}
+
+.home-text-underline-span {
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .header {
@@ -85,6 +104,7 @@
   margin: 0 10px 0 30px;
   width: 70px;
   height: 70px;
+  cursor: pointer;
 }
 
 .header-row {
@@ -95,6 +115,7 @@
 
 .header-title {
   color: rgb(242, 242, 242);
+  cursor: pointer;
 }
 
 .header-right {
@@ -139,17 +160,6 @@
 
 .header-tab:hover {
   background-color: #09aacd;
-}
-
-.home-text-underline {
-  font-size: 20px;
-  font-weight: 400;
-  color: #005568;
-}
-
-.home-text-underline-span {
-  text-decoration: underline;
-  cursor: pointer;
 }
 
 .footer {
