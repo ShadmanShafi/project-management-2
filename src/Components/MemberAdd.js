@@ -9,6 +9,7 @@ export default function MemberAdd() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const memberList = useSelector((state) => state.members.members);
+  const userToken = useSelector((state) => state.user.token)
 
   const initialValues = {
     member: "",
@@ -18,10 +19,10 @@ export default function MemberAdd() {
     member: Yup.string().required("Required"),
   });
 
-  const onSubmit = (values) => {
-    dispatch(addMember(values.member, memberList));
+  const onSubmit = async (values) => {
+    await addMember(navigate, userToken, values.member, memberList);
     //Check if success or failure, then re-direct.
-    navigate(-1); 
+    navigate(-1);
   };
 
   return (
