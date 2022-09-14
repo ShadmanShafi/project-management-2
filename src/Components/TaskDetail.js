@@ -9,6 +9,7 @@ export default function TaskDetail() {
   const dispatch = useDispatch();
   const currentTask = useSelector((state) => state.tasks.task);
   const memberList = useSelector((state) => state.members.members);
+  const userToken = useSelector((state) => state.user.token);
   const { id } = useParams();
   const [showModal, setShowModal] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
@@ -16,9 +17,8 @@ export default function TaskDetail() {
     id: "",
     title: "",
     description: "",
-    member: "",
+    memberId: "",
   });
-  console.log(currentTask);
 
   useEffect(() => {
     if (currentTask) {
@@ -26,7 +26,7 @@ export default function TaskDetail() {
         id: currentTask.id,
         title: currentTask.title,
         description: currentTask.description,
-        member: currentTask.member,
+        memberId: currentTask.member,
       });
     }
   }, currentTask);
@@ -34,7 +34,8 @@ export default function TaskDetail() {
   const onChangeFormValue = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
-
+  console.log(form);
+  
   const formIsValid = form.title.trim().length > 0;
 
   const handleBackClick = () => {
@@ -45,9 +46,17 @@ export default function TaskDetail() {
     setIsEditMode(true);
   };
 
-  const handleUpdateTaskClick = (id, title, description, member) => {
-    navigate(-1);
-    dispatch(updateTask(id, title, description, member));
+  const handleUpdateTaskClick = (
+    
+    userToken,
+    id,
+    title,
+    description,
+    memberId
+  ) => {
+    // navigate(-1);
+    
+    dispatch(updateTask(navigate, userToken, id, title, description, memberId));
   };
 
   return (
@@ -71,12 +80,14 @@ export default function TaskDetail() {
             <button
               className="task-detail-right-btns"
               onClick={() => {
+                // console.log(form.memberId);
                 if (formIsValid) {
                   handleUpdateTaskClick(
+                    userToken,
                     id,
                     form.title,
                     form.description,
-                    form.member
+                    form.memberId
                   );
                   setIsEditMode(false);
                   setForm(form);
@@ -144,19 +155,19 @@ export default function TaskDetail() {
             <p className="dashboard-bold-text">Assigned to: </p>
             <select
               className="dropdown"
-              name="member"
-              value={form.member}
+              name="memberId"
+              value={form.memberId}
               onChange={onChangeFormValue}
             >
               <option selected hidden>
                 Please Select a member
               </option>
-              {memberList.map((item, key) => (
+              {memberList.map((item) => (
                 <option
                   className="dropdown"
-                  key={key}
-                  value={item.name}
-                  name="name"
+                  key={item.id}
+                  value={item.id}
+                  // name="memberId"
                 >
                   {item.name}
                 </option>
