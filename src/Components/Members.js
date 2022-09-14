@@ -9,10 +9,11 @@ export default function Members() {
   const dispatch = useDispatch();
   const taskList = useSelector((state) => state.tasks.tasks);
   const memberList = useSelector((state) => state.members.members);
+  const userToken = useSelector((state) => state.user.token)
 
   useEffect(() => {
     setTimeout(() => {
-      dispatch(fetchMembers);
+      dispatch(fetchMembers(dispatch, userToken));
     }, 500);
   }, [dispatch]);
 
@@ -60,7 +61,7 @@ export default function Members() {
                 </button>
               </div>
               <p className="tasks-list-item-children tasks-list-item-children-no-hover">
-                {taskList.filter((task) => task.member === item.name).length}{" "}
+                {taskList.filter((task) => task.memberId === item.id).length}{" "}
                 tasks
               </p>
             </li>

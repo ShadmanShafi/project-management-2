@@ -7,8 +7,6 @@ import FormikControl from "../Formik/FormikControl";
 
 export default function MemberAdd() {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const memberList = useSelector((state) => state.members.members);
   const userToken = useSelector((state) => state.user.token)
 
   const initialValues = {
@@ -20,9 +18,9 @@ export default function MemberAdd() {
   });
 
   const onSubmit = async (values) => {
-    await addMember(navigate, userToken, values.member, memberList);
+    await addMember(navigate, userToken, values.member);
     //Check if success or failure, then re-direct.
-    navigate(-1);
+    // navigate(-1);
   };
 
   return (

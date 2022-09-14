@@ -10,10 +10,13 @@ export default function Tasks() {
   const dispatch = useDispatch();
   const memberList = useSelector((state) => state.members.members);
   const taskList = useSelector((state) => state.tasks.tasks);
+  const userToken = useSelector((state) => state.user.token);
+
+  // console.log(taskList[0].Member.name);
 
   useEffect(() => {
     setTimeout(() => {
-      dispatch(fetchTasks);
+      dispatch(fetchTasks(dispatch, userToken));
     }, 500);
   }, [dispatch]);
 
@@ -21,18 +24,19 @@ export default function Tasks() {
     navigate("/task-add");
   };
 
-  const handleTaskItemClick = (id, title, description, member) => {
-    navigate(`/task-detail-${id}`);
-    dispatch(taskGet(id, title, description, member));
+  const handleTaskItemClick = (item) => {
+    navigate(`/task-detail-${item.id}`);
+    dispatch(taskGet(item.id, item.title, item.description, item?.Member.name));
   };
 
   const handleMemberItemClick = (member) => {
-    memberList.map((item) => {
-      if (item.name === member) {
-        navigate(`/member-detail-${item.id}`);
-        dispatch(memberGet(item.id, item.name));
-      }
-    });
+    console.log(member.Member.name);
+    //   memberList.map((item) => {
+    //     if (item.name === member) {
+    navigate(`/member-detail-${member.Member.id}`);
+    dispatch(memberGet(member.Member.id, member.Member.name));
+    //     }
+    //   });
   };
 
   return (
@@ -64,23 +68,16 @@ export default function Tasks() {
                 </p>
                 <button
                   className="tasks-list-item-children tasks-list-item-children-hover"
-                  onClick={() =>
-                    handleTaskItemClick(
-                      item.id,
-                      item.title,
-                      item.description,
-                      item.member
-                    )
-                  }
+                  onClick={() => handleTaskItemClick(item)}
                 >
                   {item.title}
                 </button>
               </div>
               <button
                 className="tasks-list-item-children tasks-list-item-children-hover"
-                onClick={() => handleMemberItemClick(item.member)}
+                onClick={() => handleMemberItemClick(item)}
               >
-                {item.member}
+                {item.Member.name}
               </button>
             </li>
           ))}

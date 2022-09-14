@@ -11,6 +11,7 @@ export default function MemberDetail() {
   const dispatch = useDispatch();
   const currentMember = useSelector((state) => state.members.member);
   const taskList = useSelector((state) => state.tasks.tasks);
+  const userToken = useSelector((state) => state.user.token);
   const { id } = useParams();
   const [showModal, setShowModal] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
@@ -40,19 +41,17 @@ export default function MemberDetail() {
     navigate(-1);
   };
 
-  const handleTaskItemClick = (id, title, description, member) => {
-    navigate(`/task-detail-${id}`);
-    dispatch(taskGet(id, title, description, member));
+  const handleTaskItemClick = (item) => {
+    navigate(`/task-detail-${item.id}`);
+    dispatch(taskGet(item.id, item.title, item.description, item?.Member.name));
   };
 
   const handleEditMemberClick = () => {
     setIsEditMode(true);
   };
 
-  const handleUpdateMemberClick = (id, oldMemberName, newMemberName) => {
-    dispatch(updateMember(id, newMemberName));
-    // dispatch(updateTaskMember(oldMemberName, newMemberName, taskList));
-    navigate(-1);
+  const handleUpdateMemberClick = (userToken, id, newName) => {
+    dispatch(updateMember(navigate, userToken, id, newName));
   };
 
   return (
@@ -78,8 +77,8 @@ export default function MemberDetail() {
               onClick={() => {
                 if (formIsValid) {
                   handleUpdateMemberClick(
+                    userToken,
                     currentMember.id,
-                    currentMember.name,
                     form.name
                   );
                   setIsEditMode(false);
@@ -146,7 +145,7 @@ export default function MemberDetail() {
           <br />
           <ol type="1" className="tasks-list">
             {taskList.map((item) => {
-              if (item.member === currentMember.name) {
+              if (item.memberId === currentMember.id) {
                 {
                   listId++;
                 }
@@ -158,14 +157,7 @@ export default function MemberDetail() {
                       </p>
                       <button
                         className="tasks-list-item-children tasks-list-item-children-hover"
-                        onClick={() =>
-                          handleTaskItemClick(
-                            item.id,
-                            item.title,
-                            item.description,
-                            item.member
-                          )
-                        }
+                        onClick={() => handleTaskItemClick(item)}
                       >
                         {item.title}
                       </button>

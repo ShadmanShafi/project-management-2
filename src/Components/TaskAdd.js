@@ -4,17 +4,26 @@ import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import FormikControl from "../Formik/FormikControl";
 import addTask from "../Redux/Tasks/thunk/addTask";
+import { useEffect } from "react";
+import fetchMembers from "../Redux/Members/thunk/fetchMembers";
 
 export default function TaskAdd() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const memberList = useSelector((state) => state.members.members);
   const taskList = useSelector((state) => state.tasks.tasks);
+  const userToken = useSelector((state) => state.user.token);
+
+  useEffect(() => {
+    setTimeout(() => {
+      dispatch(fetchMembers(dispatch, userToken));
+    }, 500);
+  }, [dispatch]);
 
   const dropdownOptions = memberList.filter((member, key) => {
     const obj = {
       key: { key },
-      value: { member },
+      value:  {member} ,
     };
     return obj;
   });
@@ -29,11 +38,14 @@ export default function TaskAdd() {
     title: Yup.string().required("Required"),
   });
 
-  const onSubmit = (values) => {
-    dispatch(
-      addTask(values.title, values.description, values.member, taskList)
+  const onSubmit = async (values) => {
+    await addTask(
+      navigate,
+      userToken,
+      values.title,
+      values.description,
+      values.member,
     );
-    navigate(-1);
   };
 
   return (

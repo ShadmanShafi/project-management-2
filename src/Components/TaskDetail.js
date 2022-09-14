@@ -18,6 +18,7 @@ export default function TaskDetail() {
     description: "",
     member: "",
   });
+  console.log(currentTask);
 
   useEffect(() => {
     if (currentTask) {
