@@ -20,6 +20,8 @@ export default function TaskDetail() {
     memberId: "",
   });
 
+  // console.log(currentTask.member)
+
   useEffect(() => {
     if (currentTask) {
       setForm({
@@ -34,7 +36,7 @@ export default function TaskDetail() {
   const onChangeFormValue = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
-  console.log(form);
+  // console.log(form);
   
   const formIsValid = form.title.trim().length > 0;
 

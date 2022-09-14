@@ -50,7 +50,7 @@ export default function TaskAdd() {
 
   return (
     <div className="task-add">
-      <p className="dashboard-bold-text">Add task</p>
+      <p className="dashboard-bold-text">Add Task</p>
       <br />
       <br />
 

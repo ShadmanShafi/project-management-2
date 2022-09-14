@@ -17,7 +17,7 @@ const fetchTasks = async (dispatch, userToken) => {
       method: "GET",
       body: {},
     });
-    // console.log(response.data.tasks);
+    console.log(response.data.tasks);
     dispatch(taskLoaded(response.data.tasks));
   } catch (error) {
     console.log(error);

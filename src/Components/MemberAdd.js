@@ -7,7 +7,7 @@ import FormikControl from "../Formik/FormikControl";
 
 export default function MemberAdd() {
   const navigate = useNavigate();
-  const userToken = useSelector((state) => state.user.token)
+  const userToken = useSelector((state) => state.user.token);
 
   const initialValues = {
     member: "",
@@ -25,7 +25,7 @@ export default function MemberAdd() {
 
   return (
     <div className="task-add">
-      <p className="dashboard-bold-text">Add member</p>
+      <p className="dashboard-bold-text">Add Member</p>
       <br />
       <br />
       <Formik

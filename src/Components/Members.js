@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { memberGet } from "../Redux/Members/actions";
 import { useEffect } from "react";
 import fetchMembers from "../Redux/Members/thunk/fetchMembers";
+import getSingleMember from "../Redux/Members/thunk/getSingleMember";
 
 export default function Members() {
   const navigate = useNavigate();
@@ -13,7 +13,7 @@ export default function Members() {
 
   useEffect(() => {
     setTimeout(() => {
-      dispatch(fetchMembers(dispatch, userToken));
+      fetchMembers(dispatch, userToken);
     }, 500);
   }, [dispatch]);
 
@@ -21,9 +21,9 @@ export default function Members() {
     navigate("/member-add");
   };
 
-  const handleMemberItemClick = (id, name) => {
+  const handleMemberItemClick = (id) => {
+    getSingleMember(dispatch, userToken, id)
     navigate(`/member-detail-${id}`);
-    dispatch(memberGet(id, name));
   };
 
   return (
@@ -55,7 +55,7 @@ export default function Members() {
                 </p>
                 <button
                   className="tasks-list-item-children tasks-list-item-children-hover"
-                  onClick={() => handleMemberItemClick(item.id, item.name)}
+                  onClick={() => handleMemberItemClick(item.id)}
                 >
                   {item.name}
                 </button>
