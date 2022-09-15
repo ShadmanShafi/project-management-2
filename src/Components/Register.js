@@ -52,7 +52,7 @@ export default function Register() {
       <h2 className="home-title">Task Management</h2>
       <br />
       <br />
-      <h3 className="home-subtitle">Register as a new member</h3>
+      <h3 className="home-subtitle">Registration</h3>
       <br />
       <Formik
         initialValues={initialValues}

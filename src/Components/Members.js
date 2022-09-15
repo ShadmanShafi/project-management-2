@@ -9,20 +9,18 @@ export default function Members() {
   const dispatch = useDispatch();
   const taskList = useSelector((state) => state.tasks.tasks);
   const memberList = useSelector((state) => state.members.members);
-  const userToken = useSelector((state) => state.user.token)
+  const userToken = useSelector((state) => state.user.token);
 
   useEffect(() => {
-    setTimeout(() => {
-      fetchMembers(dispatch, userToken);
-    }, 500);
-  }, []);
+    fetchMembers(dispatch, userToken);
+    }, []);
 
   const handleMemberAddClick = () => {
     navigate("/member-add");
   };
 
   const handleMemberItemClick = (id) => {
-    getSingleMember(dispatch, userToken, id)
+    getSingleMember(dispatch, userToken, id);
     navigate(`/member-detail-${id}`);
   };
 

@@ -3,7 +3,13 @@ import { useNavigate } from "react-router-dom";
 import deleteMember from "../Redux/Members/thunk/deleteMember";
 import deleteTask from "../Redux/Tasks/thunk/deleteTask";
 
-export default function DeleteItem({ itemToDelete, userToken, id, hideModal, showModal }) {
+export default function DeleteItem({
+  itemToDelete,
+  userToken,
+  id,
+  hideModal,
+  showModal,
+}) {
   const navigate = useNavigate();
 
   const handleDeleteClick = (itemToDelete, userToken, id) => {
@@ -16,7 +22,7 @@ export default function DeleteItem({ itemToDelete, userToken, id, hideModal, sho
   };
 
   return (
-    <ReactModal isOpen={showModal}>
+    <ReactModal isOpen={showModal} ariaHideApp={false}>
       <div className="modal-delete">
         <text className="modal-text">Do you want to delete this item?</text>
         <div className="modal-row">

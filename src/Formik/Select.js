@@ -5,7 +5,7 @@ export default function Select(props) {
   return (
     <div>
       <Field as="select" id={name} name={name} {...rest}>
-        <option selected hidden>Select a Member</option>
+        <option defaultValue="" >Select a member</option>
         {options.map((opt) => {
           return (
             <option key={opt.id} value={opt.id}>

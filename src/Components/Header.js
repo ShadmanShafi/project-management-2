@@ -39,7 +39,7 @@ export default function Header() {
       </div>
       <div className="header-right">
         <div className="header-row">
-          <p className="header-username">Hello {name}</p>
+          <p className="header-username">Welcome {name}</p>
           <button className="header-logout" onClick={handleLogoutClick}>
             Logout
           </button>

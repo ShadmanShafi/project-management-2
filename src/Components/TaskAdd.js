@@ -14,15 +14,13 @@ export default function TaskAdd() {
   const userToken = useSelector((state) => state.user.token);
 
   useEffect(() => {
-    setTimeout(() => {
-      fetchMembers(dispatch, userToken);
-    }, 500);
-  }, []);
+    fetchMembers(dispatch, userToken);
+    }, []);
 
   const dropdownOptions = memberList.filter((member, key) => {
     const obj = {
       key: { key },
-      value:  {member} ,
+      value: { member },
     };
     return obj;
   });
@@ -43,7 +41,7 @@ export default function TaskAdd() {
       userToken,
       values.title,
       values.description,
-      values.member,
+      values.member
     );
   };
 

@@ -12,17 +12,15 @@ export default function Tasks() {
   const userToken = useSelector((state) => state.user.token);
 
   useEffect(() => {
-    setTimeout(() => {
-      fetchTasks(dispatch, userToken);
-    }, 500);
-  }, []);
+    fetchTasks(dispatch, userToken);
+    }, []);
 
   const handleTaskAddClick = () => {
     navigate("/task-add");
   };
 
   const handleTaskItemClick = (item) => {
-    getSingleTask(dispatch, userToken, item.id)
+    getSingleTask(dispatch, userToken, item.id);
     navigate(`/task-detail-${item.id}`);
   };
 

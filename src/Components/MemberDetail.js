@@ -25,7 +25,7 @@ export default function MemberDetail() {
         name: currentMember.name,
       });
     }
-  }, currentMember);
+  }, [currentMember]);
 
   const formIsValid = form?.name?.trim().length > 0;
   let listId = 0;

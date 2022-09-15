@@ -40,7 +40,7 @@ export default function MemberAdd() {
                   control="input"
                   type="text"
                   name="member"
-                  placeholder="Name of member"
+                  placeholder="Enter name of member"
                 />
               </div>
               <div className="member-add-btn">

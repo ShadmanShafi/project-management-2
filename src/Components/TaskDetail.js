@@ -1,12 +1,11 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import DeleteItem from "../Modals/DeleteItem";
 import updateTask from "../Redux/Tasks/thunk/updateTask";
 
 export default function TaskDetail() {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const currentTask = useSelector((state) => state.tasks.task);
   const memberList = useSelector((state) => state.members.members);
   const userToken = useSelector((state) => state.user.token);
@@ -29,7 +28,7 @@ export default function TaskDetail() {
         memberId: currentTask.member,
       });
     }
-  }, currentTask);
+  }, [currentTask]);
 
   const onChangeFormValue = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -52,7 +51,7 @@ export default function TaskDetail() {
     description,
     memberId
   ) => {
-    dispatch(updateTask(navigate, userToken, id, title, description, memberId));
+    updateTask(navigate, userToken, id, title, description, memberId);
   };
 
   return (
@@ -155,15 +154,9 @@ export default function TaskDetail() {
               value={form.memberId}
               onChange={onChangeFormValue}
             >
-              <option selected hidden>
-                Please Select a member
-              </option>
+              <option defaultValue="">Please Select a member</option>
               {memberList.map((item) => (
-                <option
-                  className="dropdown"
-                  key={item.id}
-                  value={item.id}
-                >
+                <option className="dropdown" key={item.id} value={item.id}>
                   {item.name}
                 </option>
               ))}

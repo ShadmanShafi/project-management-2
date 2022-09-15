@@ -42,7 +42,7 @@ export default function Home() {
       <h2 className="home-title">Task Management</h2>
       <br />
       <br />
-      <h3 className="home-subtitle">Login to your existing account</h3>
+      <h3 className="home-subtitle">Login</h3>
       <br />
       <Formik
         initialValues={initialValues}
