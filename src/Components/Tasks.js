@@ -79,7 +79,7 @@ export default function Tasks() {
                 className="tasks-list-item-children tasks-list-item-children-hover"
                 onClick={() => handleMemberItemClick(item)}
               >
-                {item.Member.name}
+                {item?.Member?.name}
               </button>
             </li>
           ))}

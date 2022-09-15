@@ -38,7 +38,7 @@ export default function TaskDetail() {
   };
   // console.log(form);
   
-  const formIsValid = form.title.trim().length > 0;
+  const formIsValid = form?.title?.trim().length > 0;
 
   const handleBackClick = () => {
     navigate(-1);

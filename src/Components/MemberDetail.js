@@ -35,7 +35,7 @@ export default function MemberDetail() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const formIsValid = form.name.trim().length > 0;
+  const formIsValid = form?.name?.trim().length > 0;
 
   const handleBackClick = () => {
     navigate(-1);

@@ -21,7 +21,6 @@ export default function Home() {
     email: Yup.string().email().required("*Name is required."),
     password: Yup.string()
       .required("*Password is required.")
-      .min(6, "*Password is too short."),
   });
 
   const onClickRegister = () => {
