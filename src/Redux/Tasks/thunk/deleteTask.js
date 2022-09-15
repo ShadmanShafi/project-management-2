@@ -1,14 +1,21 @@
-import firebaseDb from "../../../util/firebase";
-import { doc, deleteDoc } from "firebase/firestore/lite";
+import axios from "axios";
 
-const COLLECTION_NAME = "tasks";
+const baseUrl = "http://localhost:9001";
 
-const deleteTask = (taskId) => {
-  const id = taskId.toString();
-
-  return async () => {
-    await deleteDoc(doc(firebaseDb, COLLECTION_NAME, id));
-  };
+const deleteTask = async (userToken, taskId) => {
+  try {
+    const response = await axios({
+      url: `${baseUrl}/private/tasks/${taskId}`,
+      headers: {
+        Authorization: `Bearer ${userToken}`,
+      },
+      method: "DELETE",
+      body: {},
+    });
+    console.log(response.data);
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export default deleteTask;

@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import addMember from "../Redux/Members/thunk/addMember";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
@@ -19,8 +19,6 @@ export default function MemberAdd() {
 
   const onSubmit = async (values) => {
     await addMember(navigate, userToken, values.member);
-    //Check if success or failure, then re-direct.
-    // navigate(-1);
   };
 
   return (

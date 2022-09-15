@@ -15,7 +15,7 @@ export default function Members() {
     setTimeout(() => {
       fetchMembers(dispatch, userToken);
     }, 500);
-  }, [dispatch]);
+  }, []);
 
   const handleMemberAddClick = () => {
     navigate("/member-add");

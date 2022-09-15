@@ -1,4 +1,4 @@
-// Not needed, migrating to Back-end SQLite server. 
+// Not needed, migrated to Back-end SQLite server. 
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore/lite";
 

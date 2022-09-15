@@ -1,7 +1,5 @@
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-// import addUser from "../Redux/User/thunk/registerUser";
-// import { userAdd } from "../Redux/User/actions";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import FormikControl from "../Formik/FormikControl";

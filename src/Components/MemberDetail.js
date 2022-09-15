@@ -1,14 +1,12 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import DeleteTask from "../Modals/DeleteTask";
+import { useSelector } from "react-redux";
+import DeleteItem from "../Modals/DeleteItem";
 import updateMember from "../Redux/Members/thunk/updateMember";
 import { taskGet } from "../Redux/Tasks/actions";
-import updateTaskMember from "../Redux/Tasks/thunk/updateTaskMember";
 
 export default function MemberDetail() {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const currentMember = useSelector((state) => state.members.member);
   const taskList = useSelector((state) => state.tasks.tasks);
   const userToken = useSelector((state) => state.user.token);
@@ -29,13 +27,12 @@ export default function MemberDetail() {
     }
   }, currentMember);
 
+  const formIsValid = form?.name?.trim().length > 0;
   let listId = 0;
 
   const onChangeFormValue = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
-
-  const formIsValid = form?.name?.trim().length > 0;
 
   const handleBackClick = () => {
     navigate(-1);
@@ -43,7 +40,7 @@ export default function MemberDetail() {
 
   const handleTaskItemClick = (item) => {
     navigate(`/task-detail-${item.id}`);
-    dispatch(taskGet(item.id, item.title, item.description, item?.Member.name));
+    taskGet(item.id, item.title, item.description, item?.Member.name);
   };
 
   const handleEditMemberClick = () => {
@@ -51,14 +48,15 @@ export default function MemberDetail() {
   };
 
   const handleUpdateMemberClick = (userToken, id, newName) => {
-    dispatch(updateMember(navigate, userToken, id, newName));
+    updateMember(navigate, userToken, id, newName);
   };
 
   return (
     <div className="task-detail">
       {showModal && (
-        <DeleteTask
+        <DeleteItem
           itemToDelete={"member"}
+          userToken={userToken}
           id={id}
           hideModal={() => {
             setShowModal(false);

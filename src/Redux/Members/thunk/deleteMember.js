@@ -1,18 +1,21 @@
-import firebaseDb from "../../../util/firebase";
-import { doc, deleteDoc } from "firebase/firestore/lite";
+import axios from "axios";
 
-const COLLECTION_NAME = "members";
+const baseUrl = "http://localhost:9001";
 
-const deleteMember = (memberId) => {
-  const id = memberId.toString();
-
-  return async () => {
-    try {
-      await deleteDoc(doc(firebaseDb, COLLECTION_NAME, id));
-    } catch (error) {
-      console.log(error);
-    }
-  };
+const deleteMember = async (userToken, memberId) => {
+  try {
+    const response = await axios({
+      url: `${baseUrl}/private/members/${memberId}`,
+      headers: {
+        Authorization: `Bearer ${userToken}`,
+      },
+      method: "DELETE",
+      body: {},
+    });
+    console.log(response.data);
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export default deleteMember;

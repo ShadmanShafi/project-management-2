@@ -2,6 +2,7 @@ import axios from "axios";
 import { memberGet } from "../actions";
 
 const baseUrl = "http://localhost:9001";
+
 const getSingleMember = async (dispatch, userToken, id) => {
   try {
     const response = await axios({

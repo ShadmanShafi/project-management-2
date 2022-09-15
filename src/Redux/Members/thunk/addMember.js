@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const baseUrl = "http://localhost:9001";
+
 const addMember = async (navigate, userToken, memberName) => {
   try {
     const response = await axios({

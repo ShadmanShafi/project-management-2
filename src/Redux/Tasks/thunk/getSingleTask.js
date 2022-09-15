@@ -2,6 +2,7 @@ import axios from "axios";
 import { taskGet } from "../actions";
 
 const baseUrl = "http://localhost:9001";
+
 const getSingleTask = async (dispatch, userToken, id) => {
   try {
     const response = await axios({
@@ -18,7 +19,7 @@ const getSingleTask = async (dispatch, userToken, id) => {
         response.data.task.id,
         response.data.task.title,
         response.data.task.description,
-        response.data.task.Member.name,
+        response.data.task.Member.name
       )
     );
   } catch (error) {

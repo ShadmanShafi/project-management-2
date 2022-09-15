@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import DeleteTask from "../Modals/DeleteTask";
+import DeleteItem from "../Modals/DeleteItem";
 import updateTask from "../Redux/Tasks/thunk/updateTask";
 
 export default function TaskDetail() {
@@ -20,8 +20,6 @@ export default function TaskDetail() {
     memberId: "",
   });
 
-  // console.log(currentTask.member)
-
   useEffect(() => {
     if (currentTask) {
       setForm({
@@ -36,8 +34,7 @@ export default function TaskDetail() {
   const onChangeFormValue = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
-  // console.log(form);
-  
+
   const formIsValid = form?.title?.trim().length > 0;
 
   const handleBackClick = () => {
@@ -49,23 +46,21 @@ export default function TaskDetail() {
   };
 
   const handleUpdateTaskClick = (
-    
     userToken,
     id,
     title,
     description,
     memberId
   ) => {
-    // navigate(-1);
-    
     dispatch(updateTask(navigate, userToken, id, title, description, memberId));
   };
 
   return (
     <div className="task-detail">
       {showModal && (
-        <DeleteTask
+        <DeleteItem
           itemToDelete={"task"}
+          userToken={userToken}
           id={id}
           hideModal={() => {
             setShowModal(false);
@@ -82,7 +77,6 @@ export default function TaskDetail() {
             <button
               className="task-detail-right-btns"
               onClick={() => {
-                // console.log(form.memberId);
                 if (formIsValid) {
                   handleUpdateTaskClick(
                     userToken,
@@ -169,7 +163,6 @@ export default function TaskDetail() {
                   className="dropdown"
                   key={item.id}
                   value={item.id}
-                  // name="memberId"
                 >
                   {item.name}
                 </option>

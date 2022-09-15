@@ -1,7 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { taskGet } from "../Redux/Tasks/actions";
-import { memberGet } from "../Redux/Members/actions";
 import { useEffect } from "react";
 import fetchTasks from "../Redux/Tasks/thunk/fetchTasks";
 import getSingleMember from "../Redux/Members/thunk/getSingleMember";
@@ -13,32 +11,24 @@ export default function Tasks() {
   const taskList = useSelector((state) => state.tasks.tasks);
   const userToken = useSelector((state) => state.user.token);
 
-
   useEffect(() => {
     setTimeout(() => {
       fetchTasks(dispatch, userToken);
     }, 500);
-  }, [dispatch]);
+  }, []);
 
   const handleTaskAddClick = () => {
     navigate("/task-add");
   };
 
   const handleTaskItemClick = (item) => {
-    // dispatch(taskGet(item.id, item.title, item.description, item?.Member.name));
     getSingleTask(dispatch, userToken, item.id)
     navigate(`/task-detail-${item.id}`);
   };
 
   const handleMemberItemClick = (member) => {
-    // console.log(member.Member.name);
-    //   memberList.map((item) => {
-    //     if (item.name === member) {
     getSingleMember(dispatch, userToken, member.Member.id);
     navigate(`/member-detail-${member.Member.id}`);
-    // dispatch(memberGet(member.Member.id, member.Member.name));
-    //     }
-    //   });
   };
 
   return (

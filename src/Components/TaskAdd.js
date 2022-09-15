@@ -11,14 +11,13 @@ export default function TaskAdd() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const memberList = useSelector((state) => state.members.members);
-  const taskList = useSelector((state) => state.tasks.tasks);
   const userToken = useSelector((state) => state.user.token);
 
   useEffect(() => {
     setTimeout(() => {
-      dispatch(fetchMembers(dispatch, userToken));
+      fetchMembers(dispatch, userToken);
     }, 500);
-  }, [dispatch]);
+  }, []);
 
   const dropdownOptions = memberList.filter((member, key) => {
     const obj = {

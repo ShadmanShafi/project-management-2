@@ -1,20 +1,18 @@
 import ReactModal from "react-modal";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import deleteMember from "../Redux/Members/thunk/deleteMember";
 import deleteTask from "../Redux/Tasks/thunk/deleteTask";
 
-export default function DeleteTask({ itemToDelete, id, hideModal, showModal }) {
+export default function DeleteItem({ itemToDelete, userToken, id, hideModal, showModal }) {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
-  const handleDeleteClick = (itemToDelete, id) => {
-    navigate(-1);
+  const handleDeleteClick = (itemToDelete, userToken, id) => {
     if (itemToDelete === "member") {
-      dispatch(deleteMember(id));
+      deleteMember(userToken, id);
     } else if (itemToDelete === "task") {
-      dispatch(deleteTask(id));
+      deleteTask(userToken, id);
     }
+    navigate(-1);
   };
 
   return (
@@ -24,7 +22,7 @@ export default function DeleteTask({ itemToDelete, id, hideModal, showModal }) {
         <div className="modal-row">
           <button
             className="modal-button"
-            onClick={() => handleDeleteClick(itemToDelete, id)}
+            onClick={() => handleDeleteClick(itemToDelete, userToken, id)}
           >
             Yes
           </button>
